@@ -1,17 +1,18 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
+    "baseUrl": ".",
     "outDir": "../../../dist/out-tsc",
-    "types": ["node", "react", "react-dom"],
+    "types": ["node"],
     "declaration": true,
     "declarationMap": true,
-    "inlineSources": true,
-    "jsx": "react-jsx"
+    "sourceMap": true,
+    "inlineSources": true
   },
   "exclude": [
     "jest.config.ts",
     "src/**/*.spec.ts",
     "src/**/*.test.ts"
   ],
-  "include": ["src/**/*.js", "src/**/*.jsx", "src/**/*.ts", "src/**/*.tsx"]
+  "include": ["src/**/*.ts"]
 }

@@ -7,8 +7,7 @@ export default [
   {
     files: ['**/*.ts', '**/*.tsx', '**/*.js', '**/*.jsx'],
     rules: {
-      'react/jsx-no-useless-fragment': 'warn',
-      'react/no-array-index-key': 'warn'
+      'react/jsx-no-useless-fragment': 'warn'
     },
   },
 ];

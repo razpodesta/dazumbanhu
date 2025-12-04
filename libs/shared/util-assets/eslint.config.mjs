@@ -3,12 +3,11 @@ import nx from '@nx/eslint-plugin';
 
 export default [
   ...baseConfig,
-  ...nx.configs['flat/react'],
+  ...nx.configs['flat/typescript'],
   {
     files: ['**/*.ts', '**/*.tsx', '**/*.js', '**/*.jsx'],
     rules: {
-      'react/jsx-no-useless-fragment': 'warn',
-      'react/no-array-index-key': 'warn'
+      // Aquí podríamos poner reglas específicas de assets si fuera necesario
     },
   },
 ];

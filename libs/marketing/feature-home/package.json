@@ -1,0 +1,23 @@
+{
+  "name": "@mobile-store/marketing/feature-home",
+  "version": "0.0.1",
+  "type": "module",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "private": true,
+  "peerDependencies": {
+    "react": ">=19.0.0",
+    "react-dom": ">=19.0.0",
+    "next": ">=14.0.0"
+  },
+  "dependencies": {
+    "@mobile-store/shared/ui-kit": "workspace:*",
+    "@mobile-store/shared/util-assets": "workspace:*",
+    "framer-motion": "^11.0.0",
+    "embla-carousel-react": "^8.0.0",
+    "lucide-react": "^0.300.0",
+    "clsx": "^2.1.0",
+    "tailwind-merge": "^2.2.0",
+    "tslib": "^2.3.0"
+  }
+}

@@ -1,9 +1,32 @@
 {
   "name": "@mobile-store/source",
-  "version": "0.0.0",
-  "license": "MIT",
-  "scripts": {},
+  "version": "1.0.0",
+  "license": "UNLICENSED",
+  "author": "RaZ Podestá - MetaShark Tech",
+  "creation-date": "2025-12-04",
   "private": true,
+  "scripts": {
+    "//--- COMANDOS CRÍTICOS VERCEL (PROD) ---//": "",
+    "vercel-build": "pnpm run build:web",
+    "build:web": "npx nx build store-frontend --prod",
+    "//--- DESPLIEGUE ---//" : "",
+    "deploy:prod": "git add . && git commit -m \"chore(release): Deploy production build\" && git push origin main",
+    "//--- SIMULACIÓN DE PRODUCCIÓN LOCAL ---//": "",
+    "build:all": "nx run-many --target=build --all --configuration=production",
+    "serve:web": "nx start store-frontend",
+    "prod:sim": "pnpm run build:web && pnpm run serve:web",
+    "//--- DESARROLLO ---//": "",
+    "dev": "nx serve store-frontend",
+    "dev:web": "nx serve store-frontend --with-deps",
+    "dev:all": "nx run-many --target=serve --all --parallel=3",
+    "//--- MANTENIMIENTO & CALIDAD ---//": "",
+    "lint": "nx run-many --target=lint",
+    "test": "nx run-many --target=test",
+    "test:all": "nx run-many --target=test --parallel=false --skip-nx-cache",
+    "typecheck": "tsc -b",
+    "graph": "nx graph",
+    "clean": "nx reset"
+  },
   "devDependencies": {
     "@babel/core": "^7.14.5",
     "@babel/preset-react": "^7.14.5",
@@ -55,9 +78,6 @@
     "typescript": "~5.9.2",
     "typescript-eslint": "^8.40.0"
   },
-  "workspaces": [
-    "packages/*"
-  ],
   "packageManager": "pnpm@10.20.0+sha512.cf9998222162dd85864d0a8102e7892e7ba4ceadebbf5a31f9c2fce48dfce317a9c53b9f6464d1ef9042cba2e02ae02a9f7c143a2b438cd93c91840f0192b9dd",
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
