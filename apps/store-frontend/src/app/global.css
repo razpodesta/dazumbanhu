@@ -1,22 +1,20 @@
 @import "tailwindcss";
 
-/*
-  @source: Instrução crítica do Tailwind 4 em Monorepos.
-  Dizemos para ele escanear as classes dentro da pasta libs
-  três níveis acima.
-*/
+/* Escaneo de librerías */
 @source "../../../libs";
 
 @theme {
-  /* Cores da Marca (Dázum Banhu) */
+  /* Paleta de Colores Semántica */
   --color-brand-primary: #00C2CB;
   --color-brand-dark: #008B92;
   --color-brand-light: #E0F7FA;
 
-  /* Tipografia */
-  --font-sans: "Inter", system-ui, sans-serif;
+  /* Tipografía Mapeada a Variables de Next.js */
+  --font-sans: var(--font-inter), system-ui, sans-serif;
+  --font-heading: var(--font-outfit), sans-serif;
+  --font-handwriting: var(--font-caveat), cursive;
 
-  /* Animações Personalizadas */
+  /* Animaciones */
   --animate-float: float 6s ease-in-out infinite;
 
   @keyframes float {
@@ -25,11 +23,16 @@
   }
 }
 
-/* Reset básico para garantir comportamento consistente */
+/* Base Styles */
 :root {
   color-scheme: light dark;
 }
 
 body {
-  @apply bg-zinc-50 text-zinc-900 dark:bg-zinc-950 dark:text-zinc-50 antialiased;
+  @apply bg-zinc-50 text-zinc-900 dark:bg-zinc-950 dark:text-zinc-50 antialiased font-sans;
+}
+
+/* Utilidad para textos manuscritos */
+.font-handwriting {
+  font-family: var(--font-handwriting);
 }

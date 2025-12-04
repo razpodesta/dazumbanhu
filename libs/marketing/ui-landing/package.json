@@ -1,0 +1,19 @@
+{
+  "name": "@mobile-store/marketing-ui-landing",
+  "version": "0.0.1",
+  "type": "module",
+  "private": true,
+  "peerDependencies": {
+    "react": ">=19.0.0",
+    "react-dom": ">=19.0.0",
+    "framer-motion": "^12.0.0"
+  },
+  "dependencies": {
+    "@mobile-store/shared-ui-kit": "workspace:*",
+    "@mobile-store/shared-util-content": "workspace:*",
+    "@mobile-store/shared-util-assets": "workspace:*",
+    "lucide-react": "^0.300.0",
+    "clsx": "^2.1.0",
+    "tailwind-merge": "^2.2.0"
+  }
+}
