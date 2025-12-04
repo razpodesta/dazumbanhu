@@ -1,21 +1,24 @@
-// Imports provisionales (Asegúrate de exportarlos en ui-landing/src/index.ts cuando los crees)
-// import { Navbar, ManifestoSection, Hero } from '@mobile-store/marketing-ui-landing';
+import { Navbar } from '@mobile-store/marketing-ui-landing';
+import { Hero } from '@mobile-store/marketing-feature-home';
+// NOTA: Usamos el Hero antiguo temporalmente hasta que hagamos el "Hero Elite"
 
 export default function Index() {
   return (
-    <main className="min-h-screen selection:bg-[#00C2CB] selection:text-white">
-      {/*
-        TODO: Descomentar cuando los componentes existan en la librería ui-landing
-        <Navbar />
-        <Hero />
-        <ManifestoSection />
-      */}
+    <main className="min-h-screen bg-white dark:bg-zinc-950 selection:bg-brand-primary selection:text-white">
+      {/* 1. Navbar Flotante (Glassmorphism) */}
+      <Navbar />
 
-      {/* Placeholder temporal */}
-      <div className="flex items-center justify-center h-screen flex-col gap-4">
-        <h1 className="font-heading text-6xl font-bold">Dázum Banhu</h1>
-        <p className="font-handwriting text-4xl text-[#00C2CB]">Você merece!!!</p>
-        <p className="font-sans text-sm text-zinc-500">Construyendo experiencia Elite...</p>
+      {/* 2. Hero Section (Temporalmente el antiguo, luego lo reemplazaremos) */}
+      <Hero />
+
+      {/* 3. Espacio para scroll (Para probar el efecto del navbar) */}
+      <div className="h-[200vh] container mx-auto px-6 py-20">
+        <h2 className="text-3xl font-heading font-bold mb-4 text-zinc-900 dark:text-white">
+          Prueba de Scroll
+        </h2>
+        <p className="text-zinc-600 dark:text-zinc-400">
+          Haz scroll hacia abajo para ver cómo la barra de navegación cambia de transparente a vidrio esmerilado.
+        </p>
       </div>
     </main>
   );

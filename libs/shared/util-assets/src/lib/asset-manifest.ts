@@ -8,7 +8,7 @@ const ASSET_BASE = '/images';
 
 export const AssetManifest = {
   brand: {
-    logo: '/icons/brand/logo.svg',
+    logo: '/icons/brand/logo-circular-recortado-oficial.png',
     favicon: '/icons/brand/favicon.ico',
   },
   hero: {
