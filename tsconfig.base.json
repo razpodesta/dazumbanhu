@@ -31,11 +31,12 @@
     "types": ["node", "jest"],
     "customConditions": ["@mobile-store/source"],
     "paths": {
-      "@mobile-store/shared/util-assets": ["libs/shared/util-assets/src/index.ts"],
-      "@mobile-store/shared/ui-kit": ["libs/shared/ui-kit/src/index.ts"],
-      "@mobile-store/shared/util-security": ["libs/shared/util-security/src/index.ts"],
-      "@mobile-store/shared/util-supabase": ["libs/shared/util-supabase/src/index.ts"],
-      "@mobile-store/marketing/feature-home": ["libs/marketing/feature-home/src/index.ts"]
+      "@mobile-store/shared-util-assets": ["libs/shared/util-assets/src/index.ts"],
+      "@mobile-store/shared-ui-kit": ["libs/shared/ui-kit/src/index.ts"],
+      "@mobile-store/shared-util-security": ["libs/shared/util-security/src/index.ts"],
+      "@mobile-store/shared-util-supabase": ["libs/shared/util-supabase/src/index.ts"],
+      "@mobile-store/marketing-feature-home": ["libs/marketing/feature-home/src/index.ts"],
+      "@mobile-store/shared-util-content": ["libs/shared/util-content/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

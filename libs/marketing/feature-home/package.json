@@ -1,5 +1,5 @@
 {
-  "name": "@mobile-store-marketing-feature-home",
+  "name": "@mobile-store/marketing-feature-home",
   "version": "0.0.1",
   "type": "module",
   "main": "./src/index.ts",
@@ -11,8 +11,8 @@
     "next": ">=14.0.0"
   },
   "dependencies": {
-    "@mobile-store/shared/ui-kit": "workspace:*",
-    "@mobile-store/shared/util-assets": "workspace:*",
+    "@mobile-store/shared-ui-kit": "workspace:*",
+    "@mobile-store/shared-util-assets": "workspace:*",
     "framer-motion": "^11.0.0",
     "embla-carousel-react": "^8.0.0",
     "lucide-react": "^0.300.0",

@@ -1,5 +1,5 @@
 {
-  "name": "@mobile-store-shared-util-assets",
+  "name": "@mobile-store/shared-util-assets",
   "version": "0.0.1",
   "type": "module",
   "main": "./src/index.ts",

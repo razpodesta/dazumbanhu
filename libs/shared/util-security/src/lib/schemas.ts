@@ -5,7 +5,8 @@ export const phoneSchema = z
   .string()
   .min(10, 'Telefone inválido')
   .max(15, 'Telefone muito longo')
-  .regex(/^\(?[1-9]{2}\)? ?(?:[2-8]|9[1-9])[0-9]{3}\-?[0-9]{4}$/, 'Formato inválido. Use (XX) 9XXXX-XXXX');
+  // CORRECCIÓN: Quitamos el \ innecesario antes del -
+  .regex(/^\(?[1-9]{2}\)? ?(?:[2-8]|9[1-9])[0-9]{3}-?[0-9]{4}$/, 'Formato inválido. Use (XX) 9XXXX-XXXX');
 
 // Schema para emails
 export const emailSchema = z
