@@ -1,5 +1,5 @@
 {
-  "name": "@mobile-store/shared/util-supabase",
+  "name": "@mobile-store-shared-util-supabase",
   "version": "0.0.1",
   "type": "module",
   "main": "./src/index.ts",

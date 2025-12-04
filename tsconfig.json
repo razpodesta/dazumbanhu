@@ -2,12 +2,5 @@
   "extends": "./tsconfig.base.json",
   "compileOnSave": false,
   "files": [],
-  "references": [
-    {
-      "path": "./apps/store-frontend-e2e"
-    },
-    {
-      "path": "./apps/store-frontend"
-    }
-  ]
+  "references": []
 }
