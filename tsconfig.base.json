@@ -16,6 +16,9 @@
     "skipLibCheck": true,
     "strict": true,
     "target": "es2022",
-    "customConditions": ["@mobile-store/source"]
+    "customConditions": ["@mobile-store/source"],
+    "paths": {
+      "@mobile-store/ui-kit": ["libs/shared/ui-kit/src/index.ts"]
+    }
   }
 }
