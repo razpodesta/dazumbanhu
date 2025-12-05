@@ -1,14 +1,21 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
-    "baseUrl": ".",
     "outDir": "../../../dist/out-tsc",
     "types": ["node", "react", "react-dom"],
     "declaration": true,
     "declarationMap": true,
     "sourceMap": true,
     "inlineSources": true,
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+    // ⚠️ CRÍTICO: Aseguramos que lea los paths base
+    "baseUrl": ".",
+    "paths": {
+      "@mobile-store/shared-util-assets": ["../../../libs/shared/util-assets/src/index.ts"],
+      "@mobile-store/shared-ui-kit": ["../../../libs/shared/ui-kit/src/index.ts"],
+      "@mobile-store/shared-util-content": ["../../../libs/shared/util-content/src/index.ts"],
+      "@mobile-store/marketing-ui-landing": ["../../../libs/marketing/ui-landing/src/index.ts"]
+    }
   },
   "exclude": [
     "jest.config.ts",
