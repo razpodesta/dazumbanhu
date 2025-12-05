@@ -4,33 +4,25 @@ import * as React from 'react';
 import { useTheme } from 'next-themes';
 import { Moon, Sun } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { cn } from '../../utils';
+import { cn } from '../utils';
 
 interface ThemeToggleProps {
   className?: string;
-  /** Textos de accesibilidad inyectados desde el Content Engine para i18n */
   labels: {
     light: string;
     dark: string;
   };
 }
 
-/**
- * @component ThemeToggle
- * @description Interruptor de modo oscuro/claro con animaciones avanzadas.
- * Gestiona el ciclo de vida de React para evitar discrepancias de hidratación (Hydration Mismatch).
- */
 export function ThemeToggle({ className, labels }: ThemeToggleProps) {
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = React.useState(false);
 
-  // Efecto de montaje para asegurar que estamos en el cliente antes de renderizar iconos
   React.useEffect(() => {
     setMounted(true);
   }, []);
 
   if (!mounted) {
-    // Placeholder invisible del mismo tamaño para mantener el layout estable (CLS 0)
     return <div className={cn("h-10 w-10", className)} aria-hidden="true" />;
   }
 
