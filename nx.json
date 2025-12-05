@@ -23,7 +23,7 @@
       { "env": "NEXT_PUBLIC_SUPABASE_ANON_KEY" }
     ]
   },
-  "nxCloudId": "69318f3772f0593e6515691f",
+  "nxCloudId": "6932dc1fef01ab88a68da712",
   "targetDefaults": {
     "build": {
       "inputs": ["production", "^production"],
@@ -43,10 +43,7 @@
       "inputs": ["default", "^production", "{workspaceRoot}/jest.preset.js"],
       "cache": true
     },
-    "e2e": {
-      "inputs": ["default", "^production"],
-      "cache": true
-    },
+    "e2e": { "inputs": ["default", "^production"], "cache": true },
     "@nx/js:tsc": {
       "cache": true,
       "dependsOn": ["^build"],
@@ -57,9 +54,7 @@
     {
       "plugin": "@nx/js/typescript",
       "options": {
-        "typecheck": {
-          "targetName": "typecheck"
-        },
+        "typecheck": { "targetName": "typecheck" },
         "build": {
           "targetName": "build",
           "configName": "tsconfig.lib.json",
@@ -77,32 +72,12 @@
         "serveStaticTargetName": "serve-static"
       }
     },
-    {
-      "plugin": "@nx/eslint/plugin",
-      "options": {
-        "targetName": "lint"
-      }
-    },
-    {
-      "plugin": "@nx/jest/plugin",
-      "options": {
-        "targetName": "test"
-      }
-    },
-    {
-      "plugin": "@nx/playwright/plugin",
-      "options": {
-        "targetName": "e2e"
-      }
-    }
+    { "plugin": "@nx/eslint/plugin", "options": { "targetName": "lint" } },
+    { "plugin": "@nx/jest/plugin", "options": { "targetName": "test" } },
+    { "plugin": "@nx/playwright/plugin", "options": { "targetName": "e2e" } }
   ],
   "generators": {
-    "@nx/next": {
-      "application": {
-        "style": "tailwind",
-        "linter": "eslint"
-      }
-    },
+    "@nx/next": { "application": { "style": "tailwind", "linter": "eslint" } },
     "@nx/react": {
       "library": {
         "unitTestRunner": "jest",
