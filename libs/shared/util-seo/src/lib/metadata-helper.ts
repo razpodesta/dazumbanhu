@@ -25,8 +25,9 @@ export function constructMetadata({
     },
     description,
     metadataBase: new URL(SEO_CONFIG.siteUrl),
-    keywords: SEO_CONFIG.keywords,
-    authors: SEO_CONFIG.authors,
+    // CORRECCIÓN: Copiamos los arrays para hacerlos mutables (Readonly -> Mutable)
+    keywords: [...SEO_CONFIG.keywords],
+    authors: [...SEO_CONFIG.authors],
     creator: SEO_CONFIG.siteName,
     openGraph: {
       type: 'website',

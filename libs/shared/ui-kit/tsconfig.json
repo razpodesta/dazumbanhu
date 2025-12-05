@@ -1,12 +1,14 @@
 {
   "extends": "../../../tsconfig.base.json",
   "compilerOptions": {
-    "module": "esnext",       // ANTES: nodenext
-    "moduleResolution": "bundler", // ANTES: nodenext
+    "module": "esnext",
+    "moduleResolution": "bundler",
     "strict": true,
     "jsx": "react-jsx",
     "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true
+    "allowSyntheticDefaultImports": true,
+    // Permite que { data: undefined } sea válido para data?: string
+    "exactOptionalPropertyTypes": false
   },
   "files": [],
   "include": [],
