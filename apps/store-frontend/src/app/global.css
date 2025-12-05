@@ -1,10 +1,25 @@
 @import "tailwindcss";
 
-/* Escaneo de librerías */
+/*
+ * -----------------------------------------------------------------------
+ * CONFIGURACIÓN TAILWIND V4 - ELITE MODE
+ * -----------------------------------------------------------------------
+ * 1. Importación del núcleo.
+ * 2. Escaneo de fuentes en librerías externas (Nx Monorepo).
+ * 3. Configuración de Dark Mode manual (Clase).
+ */
+
 @source "../../../libs";
 
+/*
+ * Configuración de Modo Oscuro Manual
+ * Sobrescribe el comportamiento por defecto (media query) para usar una clase.
+ * Esto permite que 'next-themes' controle el tema.
+ */
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme {
-  /* Paleta de Colores Semántica */
+  /* Paleta de Colores Semántica (Marca) */
   --color-brand-primary: #00C2CB;
   --color-brand-dark: #008B92;
   --color-brand-light: #E0F7FA;
@@ -14,7 +29,7 @@
   --font-heading: var(--font-outfit), sans-serif;
   --font-handwriting: var(--font-caveat), cursive;
 
-  /* Animaciones */
+  /* Animaciones Personalizadas */
   --animate-float: float 6s ease-in-out infinite;
 
   @keyframes float {
@@ -23,13 +38,17 @@
   }
 }
 
-/* Base Styles */
+/*
+ * Estilos Base y Normalización
+ * Aplicamos suavizado de fuentes y colores base adaptativos.
+ */
 :root {
   color-scheme: light dark;
 }
 
 body {
-  @apply bg-zinc-50 text-zinc-900 dark:bg-zinc-950 dark:text-zinc-50 antialiased font-sans;
+  /* Transición suave de color de fondo al cambiar de tema */
+  @apply bg-zinc-50 text-zinc-900 dark:bg-zinc-950 dark:text-zinc-50 antialiased font-sans transition-colors duration-300;
 }
 
 /* Utilidad para textos manuscritos */

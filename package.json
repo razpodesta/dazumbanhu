@@ -6,33 +6,25 @@
   "creation-date": "2025-12-04",
   "private": true,
   "scripts": {
-    "//--- 1. CORE & CONTENT ENGINE (FOUNDATION) ---//": "",
+    "//--- 1. CORE UTILITIES (FOUNDATION) ---//": "",
     "generate:content": "node libs/shared/util-content/scripts/generate-dictionary.js",
 
-    "//--- 2. DESARROLLO (DAILY WORKFLOW) ---//": "",
+    "//--- 2. DEVELOPMENT (DAILY WORKFLOW) ---//": "",
     "dev": "pnpm run generate:content && nx serve store-frontend",
-    "dev:web": "nx serve store-frontend --with-deps",
-    "dev:all": "nx run-many --target=serve --all --parallel=3",
+    "dev:clean": "nx reset && pnpm run dev",
 
-    "//--- 3. PRODUCCIÓN & DEPLOYMENT (VERCEL CI/CD) ---//": "",
-    "vercel-build": "pnpm run build:web",
-    "build:web": "pnpm run generate:content && npx nx build store-frontend --prod",
-    "deploy:prod": "git add . && git commit -m \"chore(release): Deploy production build\" && git push origin main",
+    "//--- 3. DEPLOYMENT (VERCEL PIPELINE) ---//": "",
+    "build": "pnpm run generate:content && nx build store-frontend --prod",
+    "vercel-build": "pnpm run generate:content && nx build store-frontend --prod --skip-nx-cache",
 
-    "//--- 4. SIMULACIÓN LOCAL (PRE-PROD) ---//": "",
-    "prod:sim": "pnpm run build:web && pnpm run serve:web",
-    "serve:web": "nx start store-frontend",
-    "build:all": "nx run-many --target=build --all --configuration=production",
-
-    "//--- 5. MANTENIMIENTO & CALIDAD (QA) ---//": "",
-    "typecheck": "tsc -b",
+    "//--- 4. QUALITY ASSURANCE ---//": "",
     "lint": "nx run-many --target=lint",
     "test": "nx run-many --target=test",
-    "test:all": "nx run-many --target=test --parallel=false --skip-nx-cache",
+    "typecheck": "tsc -b",
 
-    "//--- 6. NX UTILITIES ---//": "",
+    "//--- 5. MAINTENANCE ---//": "",
     "graph": "nx graph",
-    "clean": "nx reset"
+    "clean": "nx reset && rm -rf dist tmp"
   },
   "devDependencies": {
     "@babel/core": "^7.14.5",

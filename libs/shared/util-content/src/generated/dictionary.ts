@@ -1,10 +1,11 @@
+
 /**
  * ------------------------------------------------------------------
  * ⚠️ ARCHIVO GENERADO AUTOMÁTICAMENTE - NO EDITAR MANUALMENTE
  * ------------------------------------------------------------------
  * Origen de datos: libs/shared/util-content/src/raw
  * Generado en:     libs/shared/util-content/src/generated/dictionary.ts
- * Fecha:           2025-12-05T17:26:29.638Z
+ * Fecha:           2025-12-05T18:30:28.687Z
  * ------------------------------------------------------------------
  */
 
