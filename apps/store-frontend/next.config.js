@@ -5,15 +5,21 @@ const { composePlugins, withNx } = require('@nx/next');
  * @type {import('@nx/next/plugins/with-nx').WithNxOptions}
  **/
 const nextConfig = {
-  // OPTIMIZACIÓN ELITE PARA VERCEL
-  output: 'standalone',
+  // NOTA: Eliminamos 'output: standalone' para compatibilidad nativa con Vercel.
+  // Si en el futuro usas Docker propio, puedes descomentarlo.
+  // output: 'standalone',
 
-  // Desactivar indicador de TS en build (ya lo hace Nx) para velocidad
+  // Desactivar checks de TS en build (ya lo hace Nx en el paso previo)
   typescript: {
     ignoreBuildErrors: true,
   },
 
-  // Opciones de Imagen (Permitir dominios externos si usas Supabase/Shopify)
+  // Desactivar checks de ESLint en build (ya lo hace Nx)
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
+
+  // Optimización de imágenes
   images: {
     remotePatterns: [
       {
@@ -26,7 +32,6 @@ const nextConfig = {
 
   nx: {
     // Set this to true if you would like to to use SVGR
-    // See: https://github.com/gregberge/svgr
     svgr: false,
   },
 };

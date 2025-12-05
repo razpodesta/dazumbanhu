@@ -4,6 +4,54 @@
   "sourceRoot": "apps/store-frontend",
   "projectType": "application",
   "tags": ["type:app", "scope:store"],
-  "// targets": "to see all targets run: nx show project store-frontend --web",
-  "targets": {}
+  "targets": {
+    "build": {
+      "executor": "@nx/next:build",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "outputPath": "dist/apps/store-frontend",
+        "assets": [
+          "apps/store-frontend/src/public"
+        ]
+      },
+      "configurations": {
+        "development": {
+          "outputPath": "dist/apps/store-frontend"
+        },
+        "production": {
+          "outputPath": "dist/apps/store-frontend"
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nx/next:server",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "store-frontend:build",
+        "dev": true
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "store-frontend:build:development",
+          "dev": true
+        },
+        "production": {
+          "buildTarget": "store-frontend:build:production",
+          "dev": false
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"]
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "apps/store-frontend/jest.config.cts"
+      }
+    }
+  }
 }
