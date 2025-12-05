@@ -1,86 +1,108 @@
 'use client';
 
 import Image from 'next/image';
+import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { AssetManifest } from '@mobile-store/shared/util-assets';
-import { WhatsAppButton } from '@mobile-store/shared/ui-kit';
+import { ArrowRight } from 'lucide-react';
+import { AssetManifest } from '@mobile-store/shared-util-assets';
+import { ContentDictionary } from '@mobile-store/shared-util-content';
+import { cn } from '@mobile-store/shared-ui-kit';
 
+/**
+ * @component Hero (Static Variant)
+ * @description Versión estática de la sección principal.
+ * Útil para pruebas A/B de rendimiento o cuando se desea una experiencia sin carrusel.
+ * Consume automáticamente el primer slide definido en el Content Engine.
+ */
 export function Hero() {
+  // Estrategia: Tomamos el primer slide como "Single Truth" para la versión estática
+  const slideData = ContentDictionary.homePage.hero.slides[0];
+
+  // Acceso seguro a los assets usando la clave del slide
+  const getAssetSource = (type: 'mobile' | 'desktop') => {
+    const heroAssets = AssetManifest.hero as any;
+    const assetKey = slideData.imageKey;
+    return heroAssets[assetKey]?.[type] || AssetManifest.ui.placeholders.banner;
+  };
+
   return (
-    <section className="relative h-[90vh] w-full overflow-hidden bg-black text-white">
-      {/* 1. Fondo / Imagen Principal (LCP Critical) */}
+    <section className="relative h-[85vh] w-full overflow-hidden bg-black text-white">
+      {/* 1. Capa de Imagen (Optimizada para LCP) */}
       <div className="absolute inset-0 z-0">
         {/* Mobile: Vertical 9:16 */}
         <div className="block h-full w-full md:hidden">
-            <Image
-            src={AssetManifest.hero.homeMain.mobile}
-            alt={AssetManifest.hero.homeMain.alt}
+          <Image
+            src={getAssetSource('mobile')}
+            alt={slideData.title}
             fill
             priority
-            className="object-cover opacity-80"
+            className="object-cover"
             sizes="100vw"
-            />
+          />
         </div>
 
         {/* Desktop: Horizontal 16:9 */}
         <div className="hidden h-full w-full md:block">
-            <Image
-            src={AssetManifest.hero.homeMain.desktop}
-            alt={AssetManifest.hero.homeMain.alt}
+          <Image
+            src={getAssetSource('desktop')}
+            alt={slideData.title}
             fill
             priority
-            className="object-cover opacity-80"
+            className="object-cover"
             sizes="100vw"
-            />
+          />
         </div>
-        {/* Gradiente para legibilidad de texto */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent" />
+
+        {/* Overlay Gradiente Inteligente basado en el tema del slide */}
+        <div
+          className={cn(
+            "absolute inset-0 bg-gradient-to-t",
+            slideData.theme === 'dark'
+              ? "from-black/90 via-black/40 to-transparent"
+              : "from-white/80 via-white/20 to-transparent"
+          )}
+        />
       </div>
 
-      {/* 2. Contenido (Scrollytelling Entry) */}
-      <div className="relative z-10 flex h-full flex-col justify-end px-6 pb-24 md:justify-center md:pb-0 md:pl-20">
+      {/* 2. Contenido Textual Animado */}
+      <div className="relative z-10 container mx-auto flex h-full flex-col justify-end px-6 pb-32 md:justify-center md:pb-0 md:px-20">
         <motion.div
-          initial={{ opacity: 0, y: 50 }}
+          initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-          className="max-w-2xl"
+          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+          className={cn(
+            "max-w-xl",
+            slideData.theme === 'dark' ? "text-white" : "text-zinc-900"
+          )}
         >
-          <h1 className="text-5xl font-black tracking-tighter sm:text-7xl">
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-emerald-400">
-              Você merece
-            </span>
-            <br />
-            o melhor da tecnologia.
+          <h1 className="font-heading text-5xl font-black tracking-tighter leading-tight sm:text-7xl mb-6">
+            {slideData.title}
           </h1>
 
-          <p className="mt-6 text-lg text-gray-200 md:text-xl max-w-lg">
-            Conserto especializado em 15 minutos, acessórios premium e a garantia de quem é #1 em Floripa.
+          <p className="mb-8 text-lg font-medium opacity-90 md:text-xl max-w-md leading-relaxed">
+            {slideData.subtitle}
           </p>
 
           <motion.div
-            className="mt-8 flex gap-4"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 0.5 }}
+            transition={{ delay: 0.4 }}
           >
-            <a
-               href="#servicos"
-               className="rounded-full bg-white px-8 py-4 font-bold text-black transition-transform hover:scale-105 active:scale-95"
+            <Link
+              href={slideData.cta.href}
+              className={cn(
+                "group inline-flex items-center gap-3 rounded-full px-8 py-4 font-bold transition-all transform hover:scale-105 active:scale-95",
+                slideData.theme === 'dark'
+                  ? "bg-white text-black hover:bg-brand-primary hover:text-white"
+                  : "bg-black text-white hover:bg-brand-primary"
+              )}
             >
-              Ver Serviços
-            </a>
-            <a
-               href="#catalogo"
-               className="rounded-full border border-white/30 bg-white/10 px-8 py-4 font-bold backdrop-blur-md transition-all hover:bg-white/20"
-            >
-              Loja Online
-            </a>
+              {slideData.cta.label}
+              <ArrowRight size={20} className="transition-transform group-hover:translate-x-1" />
+            </Link>
           </motion.div>
         </motion.div>
       </div>
-
-      {/* WhatsApp Flotante integrado en la feature */}
-      <WhatsAppButton phoneNumber="5548984771608" />
     </section>
   );
 }

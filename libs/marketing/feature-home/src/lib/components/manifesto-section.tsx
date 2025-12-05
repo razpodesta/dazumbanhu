@@ -4,11 +4,6 @@ import { motion } from 'framer-motion';
 import { Quote, Sparkles, CheckCircle2 } from 'lucide-react';
 import { ContentDictionary } from '@mobile-store/shared-util-content';
 
-/**
- * @component ManifestoSection
- * @description Sección de autoridad de marca y storytelling.
- * Implementa animaciones 'staggered' para una entrada fluida.
- */
 export function ManifestoSection() {
   const { term, phonetic, origin, definition, promises, closing } = ContentDictionary.brandManifesto;
 
@@ -31,7 +26,6 @@ export function ManifestoSection() {
 
   return (
     <section className="relative overflow-hidden bg-zinc-50 py-24 dark:bg-zinc-900">
-      {/* Background Decorators */}
       <div className="absolute -left-20 top-20 h-96 w-96 rounded-full bg-brand-primary/5 blur-[100px]" />
       <div className="absolute -right-20 bottom-20 h-96 w-96 rounded-full bg-teal-500/5 blur-[100px]" />
 
@@ -43,7 +37,6 @@ export function ManifestoSection() {
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
         >
-          {/* Header */}
           <div className="text-center">
             <motion.div variants={itemVariants} className="mb-6 inline-flex items-center gap-2 rounded-full border border-brand-primary/20 bg-brand-primary/5 px-4 py-1.5 text-sm font-bold text-brand-dark dark:text-brand-primary">
               <Sparkles size={16} />
@@ -59,7 +52,6 @@ export function ManifestoSection() {
             </motion.p>
           </div>
 
-          {/* Core Definition Block */}
           <motion.div variants={itemVariants} className="relative mt-16 mb-20">
             <div className="relative z-10 rounded-[2.5rem] bg-white p-10 shadow-2xl shadow-zinc-200/50 dark:bg-zinc-800 dark:shadow-none md:p-16">
               <Quote className="absolute left-8 top-8 rotate-180 text-brand-primary/10" size={64} />
@@ -78,9 +70,8 @@ export function ManifestoSection() {
             </div>
           </motion.div>
 
-          {/* Promises Grid */}
           <motion.div variants={itemVariants} className="grid gap-6 md:grid-cols-3">
-            {promises.map((promise, index) => (
+            {promises.map((promise: string, index: number) => (
               <div
                 key={index}
                 className="group flex flex-col items-start gap-4 rounded-3xl border border-zinc-200 bg-white p-8 transition-all hover:border-brand-primary/30 hover:shadow-lg hover:shadow-brand-primary/5 dark:border-zinc-800 dark:bg-zinc-800/50"
@@ -95,7 +86,6 @@ export function ManifestoSection() {
             ))}
           </motion.div>
 
-          {/* Closing Statement */}
           <motion.div variants={itemVariants} className="mt-20 text-center">
             <p className="font-handwriting text-3xl text-zinc-500 dark:text-zinc-400 md:text-4xl">
               "{closing}"

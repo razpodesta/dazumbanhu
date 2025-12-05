@@ -10,8 +10,9 @@ export function CategoryNav() {
 
   // Helper para obtener imagen (simulado)
   const getCatImage = (key: string) => {
-    // En producción usaríamos AssetManifest.categories[key]
-    return AssetManifest.ui.placeholders.product;
+    // Casting seguro para acceder dinámicamente al objeto de assets
+    const assets = AssetManifest.categories as Record<string, string>;
+    return assets[key] || AssetManifest.ui.placeholders.product;
   };
 
   return (
@@ -23,7 +24,7 @@ export function CategoryNav() {
 
         {/* Scroll horizontal en móvil, Grid centrado en desktop */}
         <div className="flex gap-6 overflow-x-auto pb-4 md:justify-center md:overflow-visible scrollbar-hide">
-          {items.map((item, index) => (
+          {items.map((item: { label: string; href: string; imageKey: string }, index: number) => (
             <Link
               key={index}
               href={item.href}

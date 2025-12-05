@@ -40,27 +40,26 @@ export function HeroSlider() {
   return (
     <section
       className="relative h-[85vh] w-full overflow-hidden bg-black"
-      onMouseEnter={() => setIsAutoPlaying(false)} // Pausa al hacer hover (Mejor UX)
+      onMouseEnter={() => setIsAutoPlaying(false)}
       onMouseLeave={() => setIsAutoPlaying(true)}
     >
       <AnimatePresence mode='popLayout'>
-        {slides.map((slide, index) => (
+        {slides.map((slide: any, index: number) => (
           index === currentIndex && (
             <motion.div
               key={slide.id}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              transition={{ duration: 1.2, ease: "easeInOut" }} // Fusión lenta de 3s (ajustado visualmente a 1.2s para que no sea eterno)
+              transition={{ duration: 1.2, ease: "easeInOut" }}
               className="absolute inset-0 h-full w-full"
             >
-              {/* Capa de Imagen (Mobile & Desktop) */}
               <div className="relative h-full w-full">
                 <Image
                   src={getImageSrc(slide.imageKey, 'desktop')}
                   alt={slide.title}
                   fill
-                  priority={index === 0} // Solo LCP para el primero
+                  priority={index === 0}
                   className="hidden object-cover md:block"
                   sizes="100vw"
                 />
@@ -73,14 +72,12 @@ export function HeroSlider() {
                   sizes="100vw"
                 />
 
-                {/* Overlay Gradiente para legibilidad */}
                 <div className={cn(
                   "absolute inset-0 bg-gradient-to-t",
                   slide.theme === 'dark' ? "from-black/80 via-black/20 to-transparent" : "from-white/60 via-white/10 to-transparent"
                 )} />
               </div>
 
-              {/* Contenido Textual */}
               <div className="absolute inset-0 flex flex-col justify-end pb-32 px-6 md:justify-center md:pb-0 md:px-20 container mx-auto">
                 <motion.div
                   initial={{ y: 40, opacity: 0 }}
@@ -114,7 +111,6 @@ export function HeroSlider() {
         ))}
       </AnimatePresence>
 
-      {/* Controles de Navegación (Flechas) */}
       <div className="absolute bottom-10 right-6 flex gap-4 md:bottom-20 md:right-20 z-20">
         <button
           onClick={prevSlide}
@@ -132,9 +128,8 @@ export function HeroSlider() {
         </button>
       </div>
 
-      {/* Indicadores de Progreso (Puntos) */}
       <div className="absolute bottom-10 left-6 flex gap-2 md:bottom-20 md:left-20 z-20">
-        {slides.map((_, idx) => (
+        {slides.map((_: any, idx: number) => (
           <div
             key={idx}
             className={cn(
