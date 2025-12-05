@@ -1,7 +1,8 @@
+//libs/shared/util-content/src/schemas/home.schema.ts
 import { z } from 'zod';
 
 /**
- * Schema para los Slides del Hero
+ * @schema HeroSlideSchema
  */
 const heroSlideSchema = z.object({
   id: z.string(),
@@ -11,27 +12,60 @@ const heroSlideSchema = z.object({
     label: z.string(),
     href: z.string(),
   }),
-  imageKey: z.enum(['slide1', 'slide2', 'slide3']).describe("Clave del AssetManifest"),
-  theme: z.enum(['dark', 'light']).describe("Para ajustar color de texto sobre la foto"),
+  badges: z.array(z.object({
+    label: z.string(),
+    value: z.string(),
+    iconKey: z.string()
+  })).optional(), // Nuevos badges del Hero
+  imageKey: z.enum(['slide1', 'slide2', 'slide3']),
+  theme: z.enum(['dark', 'light']),
 });
 
 /**
- * Schema para los Círculos de Navegación
+ * @schema AboutSectionSchema
+ * Datos para la sección "Quem Somos" y "Nossa Missão"
  */
-const categoryCircleSchema = z.object({
-  label: z.string(),
-  href: z.string(),
-  imageKey: z.string(), // Clave de AssetManifest.categories
-});
-
-/**
- * Schema para el Grid de Servicios (Bento Box)
- * Definimos un enum estricto para los iconos disponibles.
- */
-const serviceItemSchema = z.object({
-  iconKey: z.enum(['timer', 'truck', 'shield', 'wrench']).describe("Identificador para mapear el icono Lucide correspondiente"),
+const aboutSectionSchema = z.object({
   title: z.string(),
   description: z.string(),
+  cards: z.array(z.object({
+    title: z.string(),
+    description: z.string(),
+    iconKey: z.enum(['history', 'mission']),
+  })),
+  stats: z.array(z.object({
+    value: z.string(),
+    label: z.string(),
+  })),
+});
+
+/**
+ * @schema DifferentialsSchema
+ * Los 8 puntos de valor de la marca
+ */
+const differentialItemSchema = z.object({
+  title: z.string(),
+  description: z.string(),
+  iconKey: z.string(), // Mapeo a Lucide
+});
+
+const differentialsSectionSchema = z.object({
+  titlePrefix: z.string(),
+  titleHighlight: z.string(),
+  subtitle: z.string(),
+  items: z.array(differentialItemSchema),
+});
+
+/**
+ * @schema ServicesSchema
+ * Catálogo de servicios actualizado
+ */
+const serviceItemSchema = z.object({
+  iconKey: z.string(),
+  title: z.string(),
+  description: z.string(),
+  features: z.array(z.string()), // Lista de bullets (Tela LCD, Bateria, etc)
+  ctaLabel: z.string(),
 });
 
 /**
@@ -41,16 +75,34 @@ export const homePageSchema = z.object({
   hero: z.object({
     slides: z.array(heroSlideSchema),
     autoPlayInterval: z.number().default(3000),
+    socialProof: z.object({
+      rating: z.string(),
+      source: z.string(),
+      totalReviews: z.string(),
+    }),
   }),
   categories: z.object({
     title: z.string(),
-    items: z.array(categoryCircleSchema),
+    items: z.array(z.object({
+      label: z.string(),
+      href: z.string(),
+      imageKey: z.string(),
+    })),
   }),
+  about: aboutSectionSchema,
+  differentials: differentialsSectionSchema,
   services: z.object({
-    titlePrefix: z.string().describe("Primera parte del título (texto normal)"),
-    titleHighlight: z.string().describe("Segunda parte del título (color destacado)"),
-    items: z.array(serviceItemSchema).length(4).describe("Debe tener exactamente 4 items para el grid"),
+    titlePrefix: z.string(),
+    titleHighlight: z.string(),
+    subtitle: z.string(),
+    items: z.array(serviceItemSchema),
   }),
+  finalCta: z.object({
+    title: z.string(),
+    description: z.string(),
+    buttonLabel: z.string(),
+    whatsappText: z.string(),
+  })
 });
 
 export type HomePageContent = z.infer<typeof homePageSchema>;

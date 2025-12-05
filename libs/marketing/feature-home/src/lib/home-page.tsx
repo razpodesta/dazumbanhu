@@ -1,28 +1,34 @@
 //libs/marketing/feature-home/src/lib/home-page.tsx
 import { HeroSlider } from './components/hero-slider';
 import { CategoryNav } from './components/category-nav';
+import { AboutSection } from './components/about-section'; // Nuevo
+import { DifferentialsSection } from './components/differentials-section'; // Nuevo
 import { ServicesGrid } from './components/services-grid';
 import { ManifestoSection } from './components/manifesto-section';
 
 /**
  * @component HomePage
- * @description Composición de secciones específicas de la página de inicio.
- * Ya no gestiona el Shell (Navbar/Footer), delegando eso al Layout global.
- * @architecture Feature Sliced
+ * @description Ensamblaje maestro de la Landing Page con contenido enriquecido.
  */
 export function HomePage() {
   return (
-    <main className="relative flex flex-col w-full">
-      {/* Hero Section (Slider) */}
+    <main className="relative flex flex-col w-full overflow-x-hidden">
+      {/* 1. Hero Section (Slider + Badges) */}
       <HeroSlider />
 
-      {/* Navegación Visual de Categorías */}
+      {/* 2. Navegación Visual Rápida */}
       <CategoryNav />
 
-      {/* Grid de Beneficios/Servicios */}
+      {/* 3. Quiénes Somos + Métricas (Social Proof) */}
+      <AboutSection />
+
+      {/* 4. Diferenciales (Why Us) */}
+      <DifferentialsSection />
+
+      {/* 5. Grid de Servicios Detallado */}
       <ServicesGrid />
 
-      {/* Manifiesto de Marca */}
+      {/* 6. Manifiesto de Marca (Emotional Closing) */}
       <ManifestoSection />
     </main>
   );

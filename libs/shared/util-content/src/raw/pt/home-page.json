@@ -1,67 +1,217 @@
 {
   "hero": {
-    "autoPlayInterval": 4000,
+    "autoPlayInterval": 5000,
+    "socialProof": {
+      "rating": "5.0",
+      "source": "NO GOOGLE",
+      "totalReviews": "670+ AVALIAÇÕES"
+    },
     "slides": [
       {
         "id": "01",
-        "title": "Renove seu iPhone",
-        "subtitle": "Baterias e Telas originais trocadas em 15 minutos na sua frente.",
-        "cta": { "label": "Agendar Reparo", "href": "/servicos" },
+        "title": "Dázum Banhu Celulares",
+        "subtitle": "Loja completa com tudo o que você precisa. Conserto Especializado, Acessórios e Eletrônicos de Alta Qualidade! Você merece!!!",
+        "cta": {
+          "label": "Fale com Consultor",
+          "href": "https://wa.me/5548984771608"
+        },
         "imageKey": "slide1",
-        "theme": "dark"
-      },
-      {
-        "id": "02",
-        "title": "Estilo que Protege",
-        "subtitle": "A nova coleção de capas Anti-Impacto chegou.",
-        "cta": { "label": "Ver Coleção", "href": "/loja/capas" },
-        "imageKey": "slide2",
-        "theme": "light"
-      },
-      {
-        "id": "03",
-        "title": "Setup dos Sonhos",
-        "subtitle": "Teclados, Mouses e Headsets para elevar seu nível.",
-        "cta": { "label": "Equipar Agora", "href": "/loja/gamer" },
-        "imageKey": "slide3",
-        "theme": "dark"
+        "theme": "dark",
+        "badges": [
+          {
+            "value": "15 min",
+            "label": "Diagnóstico Inicial",
+            "iconKey": "clock"
+          },
+          {
+            "value": "1 Ano",
+            "label": "Garantia Exclusiva",
+            "iconKey": "shield"
+          },
+          {
+            "value": "Cartão",
+            "label": "Fidelidade",
+            "iconKey": "credit-card"
+          },
+          {
+            "value": "Horário",
+            "label": "Estendido",
+            "iconKey": "calendar-clock"
+          }
+        ]
       }
     ]
   },
   "categories": {
     "title": "O que você procura hoje?",
     "items": [
-      { "label": "Assistência", "href": "/servicos", "imageKey": "repair" },
-      { "label": "Capas", "href": "/loja/capas", "imageKey": "cases" },
-      { "label": "Áudio", "href": "/loja/audio", "imageKey": "audio" },
-      { "label": "MacBook", "href": "/servicos/mac", "imageKey": "mac" },
-      { "label": "Energia", "href": "/loja/carregadores", "imageKey": "chargers" }
+      {
+        "label": "Assistência",
+        "href": "/servicos",
+        "imageKey": "repair"
+      },
+      {
+        "label": "Capas",
+        "href": "/loja/capas",
+        "imageKey": "cases"
+      },
+      {
+        "label": "Áudio",
+        "href": "/loja/audio",
+        "imageKey": "audio"
+      },
+      {
+        "label": "MacBook",
+        "href": "/servicos/mac",
+        "imageKey": "mac"
+      },
+      {
+        "label": "Energia",
+        "href": "/loja/carregadores",
+        "imageKey": "chargers"
+      }
+    ]
+  },
+  "about": {
+    "title": "Quem Somos",
+    "description": "Mais do que uma loja de celulares, somos especialistas apaixonados por entregar excelência em Conserto de Celular, Acessórios e Eletrônicos em Florianópolis.",
+    "cards": [
+      {
+        "title": "Nossa História",
+        "description": "Nascemos do desejo verdadeiro de ajudar as pessoas a proteger, equipar e consertar um dos bens mais importantes do dia-a-dia. Há mais de 4 anos proporcionando experiências incríveis.",
+        "iconKey": "history"
+      },
+      {
+        "title": "Nossa Missão",
+        "description": "Prestar uma consultoria de excelência, entregando produtos com qualidade garantida e fornecendo um reparo especializado com preço justo e qualidade inquestionável.",
+        "iconKey": "mission"
+      }
+    ],
+    "stats": [
+      {
+        "value": "4+",
+        "label": "Anos de Experiência"
+      },
+      {
+        "value": "5000+",
+        "label": "Clientes Satisfeitos"
+      },
+      {
+        "value": "98%",
+        "label": "Taxa de Satisfação"
+      },
+      {
+        "value": "5.0",
+        "label": "Estrelas no Google"
+      }
+    ]
+  },
+  "differentials": {
+    "titlePrefix": "Por Que Somos a",
+    "titleHighlight": "Melhor Escolha?",
+    "subtitle": "Descubra os diferenciais únicos que nos tornam a loja referência mais querida em Florianópolis.",
+    "items": [
+      {
+        "title": "Agilidade",
+        "description": "Equipe com 4 consultores e 7 especialistas. Priorizamos a rapidez sem comprometer a qualidade.",
+        "iconKey": "zap"
+      },
+      {
+        "title": "Segurança Total",
+        "description": "Ambiente controlado. Seu dispositivo e dados estão 100% protegidos longe de acessos pessoais.",
+        "iconKey": "shield-check"
+      },
+      {
+        "title": "Garantia Exclusiva",
+        "description": "Garantia padrão de 4 meses em serviços e até 1 Ano nos produtos premium.",
+        "iconKey": "award"
+      },
+      {
+        "title": "Qualidade Garantida",
+        "description": "Perfil mais bem avaliado de Floripa! Só usamos peças premium nos nossos consertos.",
+        "iconKey": "star"
+      },
+      {
+        "title": "Localização Privilegiada",
+        "description": "Ponto nobre da Trindade, coração da UFSC. Estacionamento rotativo e acesso fácil.",
+        "iconKey": "map-pin"
+      },
+      {
+        "title": "Cartão Fidelidade",
+        "description": "Cashback de desconto ou produtos de presente. Valorizamos cada real investido.",
+        "iconKey": "gift"
+      },
+      {
+        "title": "Presente de Aniversário",
+        "description": "Café colonial na última quarta do mês com presente exclusivo para aniversariantes.",
+        "iconKey": "cake"
+      },
+      {
+        "title": "Horário Estendido",
+        "description": "Sem fechar para o almoço. Seg-Sex 8h-20h30, Sáb 9h-17h.",
+        "iconKey": "clock"
+      }
     ]
   },
   "services": {
-    "titlePrefix": "Por que somos a",
-    "titleHighlight": "#1 de Floripa?",
+    "titlePrefix": "Conheça Nossas",
+    "titleHighlight": "Soluções",
+    "subtitle": "Tecnologia de ponta e atendimento personalizado para cada tipo de situação.",
     "items": [
       {
-        "iconKey": "timer",
-        "title": "Conserto em 15 min",
-        "description": "Troca de tela e bateria express enquanto você toma um café."
-      },
-      {
-        "iconKey": "truck",
-        "title": "Busca e Entrega",
-        "description": "Delivery grátis para consertos em toda Trindade e região."
-      },
-      {
-        "iconKey": "shield",
-        "title": "Garantia Premium",
-        "description": "4 meses de garantia em serviços e 1 ano em produtos selecionados."
-      },
-      {
         "iconKey": "wrench",
-        "title": "Peças Originais",
-        "description": "Qualidade máxima para manter seu iPhone valorizado."
+        "title": "Reparo de Celular",
+        "description": "Reparo especializado com peças premium e brinde a cada serviço.",
+        "features": [
+          "Tela LCD/ OLED/ AMOLED",
+          "Restauração de tela original",
+          "Bateria de lítio premium",
+          "Conector e Dock de carga"
+        ],
+        "ctaLabel": "Saiba Mais"
+      },
+      {
+        "iconKey": "smartphone",
+        "title": "Acessórios Premium",
+        "description": "Proteção e estilo para deixar o seu celular ainda mais bonito e seguro.",
+        "features": [
+          "Capas Premium Diversas",
+          "Películas 3D de Vidro",
+          "Películas 9D Nano Cerâmica",
+          "Película da câmera"
+        ],
+        "ctaLabel": "Ver Acessórios"
+      },
+      {
+        "iconKey": "headphones",
+        "title": "Eletrônicos Diversos",
+        "description": "Os melhores eletrônicos pro seu dia a dia. Qualidade Premium.",
+        "features": [
+          "Kit Carregadores Turbo",
+          "Fones e Headphones",
+          "Mouses premium",
+          "Teclados Bluetooth"
+        ],
+        "ctaLabel": "Ver Eletrônicos"
+      },
+      {
+        "iconKey": "laptop",
+        "title": "Notebooks & PCs",
+        "description": "Limpeza, upgrade e otimização para máximo desempenho.",
+        "features": [
+          "Limpeza Profunda Completa",
+          "Formatação com Pacote Office",
+          "Backup de informações",
+          "Upgrade de SSD"
+        ],
+        "ctaLabel": "Ver Serviços de PC"
       }
     ]
+  },
+  "finalCta": {
+    "title": "Pronto para Resolver seu Problema?",
+    "description": "Nossa equipe de especialistas está disposta para oferecer o nosso melhor. Atendimento rápido e sorriso acolhedor.",
+    "buttonLabel": "FALAR COM ESPECIALISTA",
+    "whatsappText": "Atendimento imediato via WhatsApp"
   }
 }

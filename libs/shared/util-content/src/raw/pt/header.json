@@ -1,0 +1,20 @@
+//libs/shared/util-content/src/raw/pt/header.json
+{
+  "brand_name": "Dázum Banhu",
+  "tagline": "Celulares e Acessórios",
+  "aria_open_menu": "Abrir menu de navegação",
+  "aria_close_menu": "Fechar menu",
+  "aria_search": "Pesquisar produtos",
+  "aria_cart": "Ver carrinho de compras",
+  "ticker_messages": [
+    "🚀 Frete Grátis para toda Trindade em compras acima de R$ 100",
+    "💳 Parcele em até 12x sem juros no cartão",
+    "🛠️ Conserto de iPhone em 15 minutos - Agende agora!",
+    "✨ Nova coleção de capas Anti-Impacto disponível"
+  ],
+  "search_placeholder": "O que você procura hoje? (ex: iPhone 15, Capa Samsung...)",
+  "search_loading": "Processando sua busca...",
+  "search_no_results": "Ops! Não encontramos nada com esse termo.",
+  "cta_primary": "Fale no WhatsApp",
+  "mobile_menu_title": "Menu Principal"
+}

@@ -102,6 +102,7 @@
     "sharp": "^0.34.5",
     "tailwind-merge": "^3.4.0",
     "uuid": "^13.0.0",
+    "@xenova/transformers": "^2.14.0",
     "zod": "^4.1.13",
     "zustand": "^5.0.9"
   },
