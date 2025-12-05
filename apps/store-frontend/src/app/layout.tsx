@@ -1,4 +1,4 @@
-INICIO DEL ARCHIVO [apps/store-frontend/src/app/layout.tsx]
+// apps/store-frontend/src/app/layout.tsx
 import { Inter, Outfit, Caveat } from 'next/font/google';
 import { constructMetadata, getLocalBusinessSchema } from '@mobile-store/shared-util-seo';
 import { ThemeProvider, cn } from '@mobile-store/shared-ui-kit';
@@ -57,4 +57,3 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     </html>
   );
 }
-FIN DEL ARCHIVO [apps/store-frontend/src/app/layout.tsx]

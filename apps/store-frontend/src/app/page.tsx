@@ -1,3 +1,4 @@
+// apps/store-frontend/src/app/page.tsx
 import { HomePage } from '@mobile-store/marketing-feature-home';
 
 /**

@@ -1,3 +1,4 @@
+// libs/marketing/ui-landing/src/lib/navbar/navbar.tsx
 'use client';
 
 import { useState, useEffect } from 'react';

@@ -1,3 +1,4 @@
+// libs/marketing/feature-home/src/lib/home-page.tsx
 import { Navbar, Footer } from '@mobile-store/marketing-ui-landing';
 import { HeroSlider } from './components/hero-slider';
 import { CategoryNav } from './components/category-nav';

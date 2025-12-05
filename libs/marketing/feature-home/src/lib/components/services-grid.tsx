@@ -1,3 +1,4 @@
+// libs/marketing/feature-home/src/lib/components/services-grid.tsx
 'use client';
 
 import { Wrench, Truck, ShieldCheck, Timer, LucideIcon } from 'lucide-react';
@@ -30,8 +31,6 @@ export function ServicesGrid() {
         {/* Grid Bento Box */}
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {items.map((feature, index) => {
-            // TypeScript ahora infiere correctamente que feature.iconKey es una de las claves válidas
-            // gracias al Schema Zod y al "as const" del diccionario.
             const IconComponent = ICON_MAP[feature.iconKey];
 
             return (

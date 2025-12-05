@@ -1,4 +1,4 @@
-INICIO DEL ARCHIVO [libs/marketing/feature-home/src/lib/components/manifesto-section.tsx]
+// libs/marketing/feature-home/src/lib/components/manifesto-section.tsx
 'use client';
 
 import { motion } from 'framer-motion';
@@ -92,4 +92,3 @@ export function ManifestoSection() {
     </section>
   );
 }
-FIN DEL ARCHIVO [libs/marketing/feature-home/src/lib/components/manifesto-section.tsx]
