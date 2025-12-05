@@ -5,21 +5,20 @@ const { composePlugins, withNx } = require('@nx/next');
  * @type {import('@nx/next/plugins/with-nx').WithNxOptions}
  **/
 const nextConfig = {
-  // NOTA: Eliminamos 'output: standalone' para compatibilidad nativa con Vercel.
-  // Si en el futuro usas Docker propio, puedes descomentarlo.
+  // 1. Desactivamos la generación standalone para compatibilidad con Vercel
   // output: 'standalone',
 
-  // Desactivar checks de TS en build (ya lo hace Nx en el paso previo)
+  // 2. Ignoramos errores de TS en el build de Next
+  // (Nx ya hace el typecheck en su propio proceso, esto acelera el deploy)
   typescript: {
     ignoreBuildErrors: true,
   },
 
-  // Desactivar checks de ESLint en build (ya lo hace Nx)
-  eslint: {
-    ignoreDuringBuilds: true,
-  },
+  // 3. ¡CORRECCIÓN! Eliminamos el bloque 'eslint'.
+  // Next.js 16 no soporta esta configuración aquí.
+  // Nx se encarga de que no subas código sucio.
 
-  // Optimización de imágenes
+  // 4. Optimización de imágenes (Permitir dominios externos)
   images: {
     remotePatterns: [
       {
@@ -30,8 +29,8 @@ const nextConfig = {
     formats: ['image/avif', 'image/webp'],
   },
 
+  // 5. Configuración específica de Nx
   nx: {
-    // Set this to true if you would like to to use SVGR
     svgr: false,
   },
 };
