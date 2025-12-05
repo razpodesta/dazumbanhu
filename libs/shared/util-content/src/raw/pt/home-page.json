@@ -37,5 +37,31 @@
       { "label": "MacBook", "href": "/servicos/mac", "imageKey": "mac" },
       { "label": "Energia", "href": "/loja/carregadores", "imageKey": "chargers" }
     ]
+  },
+  "services": {
+    "titlePrefix": "Por que somos a",
+    "titleHighlight": "#1 de Floripa?",
+    "items": [
+      {
+        "iconKey": "timer",
+        "title": "Conserto em 15 min",
+        "description": "Troca de tela e bateria express enquanto você toma um café."
+      },
+      {
+        "iconKey": "truck",
+        "title": "Busca e Entrega",
+        "description": "Delivery grátis para consertos em toda Trindade e região."
+      },
+      {
+        "iconKey": "shield",
+        "title": "Garantia Premium",
+        "description": "4 meses de garantia em serviços e 1 ano em produtos selecionados."
+      },
+      {
+        "iconKey": "wrench",
+        "title": "Peças Originais",
+        "description": "Qualidade máxima para manter seu iPhone valorizado."
+      }
+    ]
   }
 }
