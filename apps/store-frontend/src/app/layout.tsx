@@ -1,7 +1,8 @@
-// apps/store-frontend/src/app/layout.tsx
+//apps/store-frontend/src/app/layout.tsx
 import { Inter, Outfit, Caveat } from 'next/font/google';
 import { constructMetadata, getLocalBusinessSchema } from '@mobile-store/shared-util-seo';
 import { ThemeProvider, cn } from '@mobile-store/shared-ui-kit';
+import { Navbar, Footer } from '@mobile-store/marketing-ui-landing';
 import './global.css';
 
 // 1. Configuración de Fuentes (Google Fonts Optimization)
@@ -35,8 +36,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="pt-BR" suppressHydrationWarning className={`${fontSans.variable} ${fontHeading.variable} ${fontHandwriting.variable}`}>
       <body className={cn(
-        "min-h-screen bg-zinc-50 font-sans antialiased text-zinc-900 dark:bg-black dark:text-zinc-50",
-        "selection:bg-[#00C2CB] selection:text-white"
+        "min-h-screen bg-zinc-50 font-sans antialiased text-zinc-900 dark:bg-black dark:text-zinc-50 selection:bg-[#00C2CB] selection:text-white flex flex-col",
       )}>
         {/* Schema JSON-LD */}
         <script
@@ -51,7 +51,16 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           enableSystem
           disableTransitionOnChange
         >
-          {children}
+          {/* Header Global Persistente */}
+          <Navbar />
+
+          {/* Contenido Dinámico de la Página */}
+          <div className="flex-grow">
+            {children}
+          </div>
+
+          {/* Footer Global Persistente */}
+          <Footer />
         </ThemeProvider>
       </body>
     </html>

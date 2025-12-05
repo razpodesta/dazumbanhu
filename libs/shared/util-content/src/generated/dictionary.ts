@@ -5,7 +5,7 @@
  * ------------------------------------------------------------------
  * Origen de datos: libs/shared/util-content/src/raw
  * Generado en:     libs/shared/util-content/src/generated/dictionary.ts
- * Fecha:           2025-12-05T18:30:28.687Z
+ * Fecha:           2025-12-05T20:18:37.186Z
  * ------------------------------------------------------------------
  */
 
@@ -200,6 +200,24 @@ export const i18nDictionary = {
           }
         ]
       }
+    },
+    "navLinks": {
+      "home": "Início",
+      "catalog": "Catálogo",
+      "services": "Serviços",
+      "support": "Suporte",
+      "electronics_hub": "Eletrônicos",
+      "smartphones": "Smartphones",
+      "laptops": "Notebooks",
+      "accessories": "Acessórios",
+      "gaming": "Games & Consoles",
+      "track_order": "Rastrear Pedido",
+      "returns": "Trocas e Devoluções",
+      "whatsapp_support": "Suporte via WhatsApp",
+      "help_center": "Central de Ajuda",
+      "new_arrivals": "Lançamentos",
+      "best_sellers": "Mais Vendidos",
+      "deals": "Ofertas do Dia"
     },
     "navbar": {
       "logoText": "Dázum Banhu",

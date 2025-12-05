@@ -1,5 +1,4 @@
-// libs/marketing/feature-home/src/lib/home-page.tsx
-import { Navbar, Footer } from '@mobile-store/marketing-ui-landing';
+//libs/marketing/feature-home/src/lib/home-page.tsx
 import { HeroSlider } from './components/hero-slider';
 import { CategoryNav } from './components/category-nav';
 import { ServicesGrid } from './components/services-grid';
@@ -7,25 +6,24 @@ import { ManifestoSection } from './components/manifesto-section';
 
 /**
  * @component HomePage
- * @description Ensamblaje maestro de la Landing Page.
- * Orquesta los componentes visuales de UI-Landing y Feature-Home.
+ * @description Composición de secciones específicas de la página de inicio.
+ * Ya no gestiona el Shell (Navbar/Footer), delegando eso al Layout global.
+ * @architecture Feature Sliced
  */
 export function HomePage() {
   return (
-    <main className="relative flex min-h-screen flex-col bg-white dark:bg-black">
-      {/* Navegación Global */}
-      <Navbar />
+    <main className="relative flex flex-col w-full">
+      {/* Hero Section (Slider) */}
+      <HeroSlider />
 
-      {/* Bloques de Contenido (Feature) */}
-      <div className="flex flex-col w-full">
-        <HeroSlider />
-        <CategoryNav />
-        <ServicesGrid />
-        <ManifestoSection />
-      </div>
+      {/* Navegación Visual de Categorías */}
+      <CategoryNav />
 
-      {/* Pie de Página Global */}
-      <Footer />
+      {/* Grid de Beneficios/Servicios */}
+      <ServicesGrid />
+
+      {/* Manifiesto de Marca */}
+      <ManifestoSection />
     </main>
   );
 }

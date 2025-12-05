@@ -38,7 +38,8 @@
       "@mobile-store/marketing-feature-home": ["libs/marketing/feature-home/src/index.ts"],
       "@mobile-store/shared-util-content": ["libs/shared/util-content/src/index.ts"],
       "@mobile-store/marketing-ui-landing": ["libs/marketing/ui-landing/src/index.ts"],
-"@mobile-store/shared-util-seo": ["libs/shared/util-seo/src/index.ts"]
+      "@mobile-store/shared-util-seo": ["libs/shared/util-seo/src/index.ts"],
+      "@mobile-store/shared-util-routing": ["libs/shared/util-routing/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

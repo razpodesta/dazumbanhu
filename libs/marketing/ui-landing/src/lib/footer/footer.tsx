@@ -1,11 +1,13 @@
+//libs/marketing/ui-landing/src/lib/footer/footer.tsx
 'use client';
 
 import Link from 'next/link';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
-import { Instagram, MessageCircle, Facebook, MapPin, Clock, ArrowUpRight, ShieldCheck } from 'lucide-react';
+import { Instagram, MessageCircle, Facebook, MapPin, Clock, ShieldCheck, ArrowUpRight } from 'lucide-react';
 import { ContentDictionary } from '@mobile-store/shared-util-content';
 import { AssetManifest } from '@mobile-store/shared-util-assets';
+import { FooterColumn, type LinkItem } from './footer-links';
 
 export function Footer() {
   const content = ContentDictionary.footer;
@@ -29,7 +31,7 @@ export function Footer() {
         {/* GRID PRINCIPAL */}
         <div className="grid gap-12 lg:grid-cols-12 lg:gap-8">
 
-          {/* IDENTIDAD DE MARCA */}
+          {/* COLUMNA 1: IDENTIDAD DE MARCA */}
           <div className="flex flex-col gap-6 lg:col-span-4">
             <Link href="/" className="inline-flex items-center gap-2 transition-opacity hover:opacity-80">
               <div className="relative h-12 w-12 overflow-hidden rounded-xl shadow-sm">
@@ -66,33 +68,19 @@ export function Footer() {
             </div>
           </div>
 
-          {/* NAVEGACIÓN DINÁMICA */}
+          {/* COLUMNAS 2-4: NAVEGACIÓN DINÁMICA Y SOCIAL */}
           <div className="grid grid-cols-2 gap-8 lg:col-span-8 lg:grid-cols-4 lg:pl-12">
+
+            {/* Renderizado dinámico de columnas de enlaces */}
             {content.navigationColumns.map((col, idx) => (
-              <div key={idx} className="flex flex-col gap-4">
-                <h3 className="font-heading text-xs font-bold uppercase tracking-wider text-zinc-900 dark:text-white">
-                  {col.title}
-                </h3>
-                <nav>
-                  <ul className="flex flex-col gap-3">
-                    {col.links.map((link, linkIdx) => (
-                      <li key={linkIdx}>
-                        <Link
-                          href={link.href}
-                          target={link.isExternal ? "_blank" : undefined}
-                          className="group inline-flex items-center gap-1.5 text-sm font-medium text-zinc-500 transition-colors hover:text-brand-primary dark:text-zinc-400 dark:hover:text-brand-primary"
-                        >
-                          {link.label}
-                          {link.isExternal && <ArrowUpRight size={12} className="opacity-50" />}
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
-                </nav>
-              </div>
+              <FooterColumn
+                key={idx}
+                title={col.title}
+                links={col.links as unknown as readonly LinkItem[]}
+              />
             ))}
 
-            {/* COLUMNA SOCIAL */}
+            {/* COLUMNA SOCIAL (Puede ser extraída también si crece) */}
             <div className="col-span-2 flex flex-col gap-6 lg:col-span-2">
               <div>
                 <h3 className="mb-4 font-heading text-xs font-bold uppercase tracking-wider text-zinc-900 dark:text-white">

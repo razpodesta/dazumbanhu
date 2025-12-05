@@ -1,10 +1,10 @@
-// apps/store-frontend/src/app/page.tsx
+//apps/store-frontend/src/app/page.tsx
 import { HomePage } from '@mobile-store/marketing-feature-home';
 
 /**
- * @page Home Index
- * @description Punto de entrada principal. Delega la lógica a la Feature Library
- * para mantener el patrón DDD y evitar lógica de negocio en la capa de enrutamiento.
+ * @page Index (Ruta: /)
+ * @description Punto de entrada.
+ * La estructura global (Navbar/Footer) es provista por layout.tsx.
  */
 export default function Index() {
   return <HomePage />;

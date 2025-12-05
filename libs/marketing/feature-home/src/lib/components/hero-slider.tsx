@@ -1,141 +1,89 @@
+//libs/marketing/feature-home/src/lib/components/hero-slider.tsx
 'use client';
 
-import { useState, useEffect } from 'react';
-import Image from 'next/image';
-import Link from 'next/link';
-import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronLeft, ChevronRight, ArrowRight } from 'lucide-react';
+import { AnimatePresence } from 'framer-motion';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { ContentDictionary } from '@mobile-store/shared-util-content';
-import { AssetManifest } from '@mobile-store/shared-util-assets';
 import { cn } from '@mobile-store/shared-ui-kit';
+import { useCarousel } from '../hooks/use-carousel';
+import { HeroSlide } from './hero-slide';
 
+/**
+ * @component HeroSlider
+ * @description Versión interactiva del Hero. Orquesta múltiples átomos 'HeroSlide'.
+ */
 export function HeroSlider() {
   const { slides, autoPlayInterval } = ContentDictionary.homePage.hero;
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
 
-  // Lógica de Autoplay con limpieza segura
-  useEffect(() => {
-    if (!isAutoPlaying) return;
-    const timer = setInterval(() => {
-      nextSlide();
-    }, autoPlayInterval);
-    return () => clearInterval(timer);
-  }, [currentIndex, isAutoPlaying, autoPlayInterval]);
-
-  const nextSlide = () => {
-    setCurrentIndex((prev) => (prev + 1) % slides.length);
-  };
-
-  const prevSlide = () => {
-    setCurrentIndex((prev) => (prev - 1 + slides.length) % slides.length);
-  };
-
-  // Mapeo seguro de imágenes desde el Manifest
-  const getImageSrc = (key: string, type: 'mobile' | 'desktop') => {
-    const assets = AssetManifest.hero as any;
-    return assets[key]?.[type] || AssetManifest.ui.placeholders.product;
-  };
+  const {
+    currentIndex,
+    nextSlide,
+    prevSlide,
+    goToSlide,
+    pause,
+    resume
+  } = useCarousel({
+    totalItems: slides.length,
+    interval: autoPlayInterval,
+    autoPlay: true
+  });
 
   return (
     <section
-      className="relative h-[85vh] w-full overflow-hidden bg-black"
-      onMouseEnter={() => setIsAutoPlaying(false)}
-      onMouseLeave={() => setIsAutoPlaying(true)}
+      className="relative h-[85vh] w-full overflow-hidden bg-black group"
+      onMouseEnter={pause}
+      onMouseLeave={resume}
+      aria-label="Destaques Principais"
     >
       <AnimatePresence mode='popLayout'>
-        {slides.map((slide: any, index: number) => (
+        {slides.map((slide, index) => (
           index === currentIndex && (
-            <motion.div
+            <HeroSlide
               key={slide.id}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 1.2, ease: "easeInOut" }}
-              className="absolute inset-0 h-full w-full"
-            >
-              <div className="relative h-full w-full">
-                <Image
-                  src={getImageSrc(slide.imageKey, 'desktop')}
-                  alt={slide.title}
-                  fill
-                  priority={index === 0}
-                  className="hidden object-cover md:block"
-                  sizes="100vw"
-                />
-                <Image
-                  src={getImageSrc(slide.imageKey, 'mobile')}
-                  alt={slide.title}
-                  fill
-                  priority={index === 0}
-                  className="block object-cover md:hidden"
-                  sizes="100vw"
-                />
-
-                <div className={cn(
-                  "absolute inset-0 bg-gradient-to-t",
-                  slide.theme === 'dark' ? "from-black/80 via-black/20 to-transparent" : "from-white/60 via-white/10 to-transparent"
-                )} />
-              </div>
-
-              <div className="absolute inset-0 flex flex-col justify-end pb-32 px-6 md:justify-center md:pb-0 md:px-20 container mx-auto">
-                <motion.div
-                  initial={{ y: 40, opacity: 0 }}
-                  animate={{ y: 0, opacity: 1 }}
-                  transition={{ delay: 0.5, duration: 0.8 }}
-                  className={cn("max-w-xl", slide.theme === 'dark' ? "text-white" : "text-zinc-900")}
-                >
-                  <h2 className="font-heading text-5xl md:text-7xl font-black tracking-tighter mb-4 leading-tight">
-                    {slide.title}
-                  </h2>
-                  <p className="text-lg md:text-xl font-medium mb-8 opacity-90 max-w-md">
-                    {slide.subtitle}
-                  </p>
-
-                  <Link
-                    href={slide.cta.href}
-                    className={cn(
-                      "inline-flex items-center gap-2 px-8 py-4 rounded-full font-bold transition-all transform hover:scale-105 active:scale-95",
-                      slide.theme === 'dark'
-                        ? "bg-white text-black hover:bg-brand-primary hover:text-white"
-                        : "bg-black text-white hover:bg-brand-primary"
-                    )}
-                  >
-                    {slide.cta.label}
-                    <ArrowRight size={20} />
-                  </Link>
-                </motion.div>
-              </div>
-            </motion.div>
+              title={slide.title}
+              subtitle={slide.subtitle}
+              ctaLabel={slide.cta.label}
+              ctaHref={slide.cta.href}
+              imageKey={slide.imageKey}
+              theme={slide.theme}
+              isActive={index === currentIndex}
+              priority={index === 0} // Solo el primero es prioritario para LCP
+            />
           )
         ))}
       </AnimatePresence>
 
-      <div className="absolute bottom-10 right-6 flex gap-4 md:bottom-20 md:right-20 z-20">
+      {/* Controles de Navegación (Glassmorphism) */}
+      <div className="absolute bottom-8 right-6 flex gap-4 md:bottom-16 md:right-16 z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
         <button
           onClick={prevSlide}
-          className="p-3 rounded-full border border-white/20 bg-black/20 backdrop-blur-md text-white hover:bg-white hover:text-black transition-all"
+          className="p-3 rounded-full border border-white/10 bg-black/20 backdrop-blur-xl text-white hover:bg-white hover:text-black transition-all hover:scale-110 active:scale-95"
           aria-label="Anterior"
         >
           <ChevronLeft size={24} />
         </button>
         <button
           onClick={nextSlide}
-          className="p-3 rounded-full border border-white/20 bg-black/20 backdrop-blur-md text-white hover:bg-white hover:text-black transition-all"
+          className="p-3 rounded-full border border-white/10 bg-black/20 backdrop-blur-xl text-white hover:bg-white hover:text-black transition-all hover:scale-110 active:scale-95"
           aria-label="Siguiente"
         >
           <ChevronRight size={24} />
         </button>
       </div>
 
-      <div className="absolute bottom-10 left-6 flex gap-2 md:bottom-20 md:left-20 z-20">
-        {slides.map((_: any, idx: number) => (
-          <div
+      {/* Indicadores de Progreso */}
+      <div className="absolute bottom-8 left-6 flex gap-2 md:bottom-16 md:left-16 z-20">
+        {slides.map((_, idx) => (
+          <button
             key={idx}
+            onClick={() => goToSlide(idx)}
             className={cn(
-              "h-1 transition-all duration-500 rounded-full",
-              idx === currentIndex ? "w-12 bg-white" : "w-4 bg-white/40"
+              "h-1.5 rounded-full transition-all duration-500 shadow-sm",
+              idx === currentIndex
+                ? "w-12 bg-white"
+                : "w-3 bg-white/30 hover:bg-white/60"
             )}
+            aria-label={`Ir para o slide ${idx + 1}`}
           />
         ))}
       </div>

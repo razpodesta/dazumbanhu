@@ -1,57 +1,60 @@
-/* apps/store-frontend/src/app/global.css */
+/*apps/store-frontend/src/app/global.css*/
 @import "tailwindcss";
-
-/*
- * -----------------------------------------------------------------------
- * SOURCE SCANNING (MONOREPO)
- * Indica a Tailwind v4 que busque clases en las librerías compartidas.
- * La ruta es relativa a este archivo.
- * -----------------------------------------------------------------------
- */
 @source "../../../libs";
 
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
-  /* Paleta Dázum Banhu */
+  /* Colores Semánticos */
   --color-brand-primary: #00C2CB;
   --color-brand-dark: #008B92;
   --color-brand-light: #E0F7FA;
 
-  /* Gradientes y Fondos Especiales */
-  --color-surface-glass: rgba(255, 255, 255, 0.7);
-  --color-surface-glass-dark: rgba(9, 9, 11, 0.7);
+  /* Efectos */
+  --color-glass-border: rgba(255, 255, 255, 0.1);
+  --color-glass-bg: rgba(255, 255, 255, 0.05);
 
-  /* Mapeo de Fuentes (Conectadas a layout.tsx) */
+  /* Tipografía */
   --font-sans: var(--font-inter), system-ui, sans-serif;
   --font-heading: var(--font-outfit), sans-serif;
   --font-handwriting: var(--font-caveat), cursive;
 
-  /* Animaciones Suaves */
+  /* Animaciones */
   --animate-float: float 6s ease-in-out infinite;
-  --animate-fade-in-up: fadeInUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+  --animate-pulse-slow: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 
   @keyframes float {
     0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-15px); }
-  }
-
-  @keyframes fadeInUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
+    50% { transform: translateY(-20px); }
   }
 }
 
-/* Reset y Utilidades Globales */
+@layer components {
+  /* Abstracción de Glassmorphism */
+  .glass-panel {
+    @apply bg-white/10 backdrop-blur-md border border-white/20 shadow-xl;
+  }
+
+  /* Abstracción de Background Blobs para Manifesto */
+  .ambient-blob {
+    @apply absolute rounded-full blur-[100px] opacity-60 pointer-events-none;
+  }
+  .ambient-blob-primary {
+    @apply bg-brand-primary/20;
+  }
+  .ambient-blob-secondary {
+    @apply bg-purple-500/10;
+  }
+}
+
 :root {
   color-scheme: light dark;
 }
 
 body {
-  @apply bg-zinc-50 text-zinc-900 transition-colors duration-300;
+  @apply bg-zinc-50 text-zinc-900 dark:bg-zinc-950 dark:text-zinc-50 antialiased font-sans transition-colors duration-300;
 }
 
-/* Utilidad para ocultar scrollbar pero permitir scroll */
 .scrollbar-hide::-webkit-scrollbar {
     display: none;
 }
