@@ -1,0 +1,41 @@
+{
+  "hero": {
+    "autoPlayInterval": 4000,
+    "slides": [
+      {
+        "id": "01",
+        "title": "Renove seu iPhone",
+        "subtitle": "Baterias e Telas originais trocadas em 15 minutos na sua frente.",
+        "cta": { "label": "Agendar Reparo", "href": "/servicos" },
+        "imageKey": "slide1",
+        "theme": "dark"
+      },
+      {
+        "id": "02",
+        "title": "Estilo que Protege",
+        "subtitle": "A nova coleção de capas Anti-Impacto chegou.",
+        "cta": { "label": "Ver Coleção", "href": "/loja/capas" },
+        "imageKey": "slide2",
+        "theme": "light"
+      },
+      {
+        "id": "03",
+        "title": "Setup dos Sonhos",
+        "subtitle": "Teclados, Mouses e Headsets para elevar seu nível.",
+        "cta": { "label": "Equipar Agora", "href": "/loja/gamer" },
+        "imageKey": "slide3",
+        "theme": "dark"
+      }
+    ]
+  },
+  "categories": {
+    "title": "O que você procura hoje?",
+    "items": [
+      { "label": "Assistência", "href": "/servicos", "imageKey": "repair" },
+      { "label": "Capas", "href": "/loja/capas", "imageKey": "cases" },
+      { "label": "Áudio", "href": "/loja/audio", "imageKey": "audio" },
+      { "label": "MacBook", "href": "/servicos/mac", "imageKey": "mac" },
+      { "label": "Energia", "href": "/loja/carregadores", "imageKey": "chargers" }
+    ]
+  }
+}

@@ -1,39 +1,30 @@
 import { Navbar, Footer } from '@mobile-store/marketing-ui-landing';
-import { Hero } from './components/hero';
-import { ServicesGrid } from './components/services-grid';
+import { HeroSlider } from './components/hero-slider';
+import { CategoryNav } from './components/category-nav';
+import { ServicesGrid } from './components/services-grid'; // Asumimos que este es el Bento Grid
 import { ManifestoSection } from './components/manifesto-section';
 
-/**
- * @component HomePage
- * @description Orquestador principal de la Landing Page.
- * Compone los aparatos visuales en el orden narrativo correcto.
- *
- * Estructura:
- * 1. Navbar (Flotante Global)
- * 2. Hero (Impacto Visual)
- * 3. Services (Propuesta de Valor Racional)
- * 4. Manifesto (Conexión Emocional)
- * 5. Footer (Navegación y Cierre)
- */
 export function HomePage() {
   return (
-    <main className="relative min-h-screen bg-white dark:bg-zinc-950 selection:bg-brand-primary selection:text-white">
-      {/* 1. Navegación Superior */}
+    <main className="relative min-h-screen bg-white dark:bg-black selection:bg-brand-primary selection:text-white">
+      {/* 1. Navegación Transparente (Glass) */}
       <Navbar />
 
-      {/* 2. Área de Contenido Principal */}
       <div className="flex flex-col">
-        {/* Sección Hero: Punto de entrada (LCP Critical) */}
-        <Hero />
+        {/* 2. Hero Cinematográfico (Infinity Fade) */}
+        <HeroSlider />
 
-        {/* Sección Servicios: Grid de Bento Box */}
+        {/* 3. Navegación Rápida Visual (Círculos) */}
+        <CategoryNav />
+
+        {/* 4. Grid de Servicios (Bento Box - Reutilizado) */}
         <ServicesGrid />
 
-        {/* Sección Manifiesto: Storytelling de Marca */}
+        {/* 5. Autoridad de Marca (Social Proof) */}
         <ManifestoSection />
       </div>
 
-      {/* 3. Pie de Página */}
+      {/* 6. Footer Estructural */}
       <Footer />
     </main>
   );
