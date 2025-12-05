@@ -1,0 +1,20 @@
+{
+  "logoText": "Dázum Banhu",
+  "logoSubtext": "Celulares",
+  "links": {
+    "home": { "label": "Início", "href": "/" },
+    "repair": { "label": "Conserto Rápido", "href": "#reparo", "isHighlight": true },
+    "shop": { "label": "Acessórios", "href": "#acessorios" },
+    "about": { "label": "Sobre Nós", "href": "#historia" }
+  },
+  "actions": {
+    "search": "Buscar produtos",
+    "cart": "Ver carrinho de compras",
+    "menu": "Abrir menu de navegação"
+  },
+  "mobile": {
+    "menuTitle": "Menu",
+    "emergencyCta": "Falar no WhatsApp",
+    "locationText": "Trindade, Florianópolis - SC"
+  }
+}

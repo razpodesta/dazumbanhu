@@ -2,26 +2,33 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { motion, AnimatePresence, useScroll, useMotionValueEvent } from 'framer-motion';
 import { Menu, X, ShoppingBag, Search, Wrench, ChevronRight, Phone } from 'lucide-react';
 import { cn } from '@mobile-store/shared-ui-kit';
 import { AssetManifest } from '@mobile-store/shared-util-assets';
-import Image from 'next/image';
+import { ContentDictionary } from '@mobile-store/shared-util-content';
 
-// Definición de enlaces de navegación
-const NAV_LINKS = [
-  { label: 'Início', href: '/' },
-  { label: 'Conserto Rápido', href: '#reparo', isHighlight: true },
-  { label: 'Acessórios', href: '#acessorios' },
-  { label: 'Sobre Nós', href: '#historia' },
-];
-
+/**
+ * Navbar Component
+ *
+ * Barra de navegación principal del sitio.
+ * - Reactiva al scroll (Glassmorphism).
+ * - Totalmente data-driven (contenido desde ContentDictionary).
+ * - Mobile First con menú lateral animado.
+ */
 export function Navbar() {
   const { scrollY } = useScroll();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  // Detectar scroll para cambiar el estilo
+  // Acceso seguro al contenido tipado (generado por el Content Engine)
+  const content = ContentDictionary.navbar;
+
+  // Transformamos el objeto de links en un array para iterar
+  const navLinks = Object.values(content.links);
+
+  // Detectar scroll para cambiar el estilo visual
   useMotionValueEvent(scrollY, "change", (latest) => {
     const shouldBeScrolled = latest > 50;
     if (isScrolled !== shouldBeScrolled) {
@@ -29,13 +36,18 @@ export function Navbar() {
     }
   });
 
-  // Bloquear scroll del body cuando el menú móvil está abierto
+  // Bloquear el scroll del body cuando el menú móvil está abierto
   useEffect(() => {
     if (isMobileMenuOpen) {
       document.body.style.overflow = 'hidden';
     } else {
       document.body.style.overflow = 'unset';
     }
+
+    // Cleanup al desmontar
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
   }, [isMobileMenuOpen]);
 
   return (
@@ -44,47 +56,51 @@ export function Navbar() {
         className={cn(
           "fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-in-out",
           isScrolled
-            ? "bg-white/80 dark:bg-zinc-950/80 backdrop-blur-md shadow-sm border-b border-white/20 py-3"
+            ? "bg-white/80 dark:bg-zinc-950/80 backdrop-blur-md shadow-sm border-b border-zinc-200/50 dark:border-zinc-800/50 py-3"
             : "bg-transparent py-5"
         )}
         initial={{ y: -100 }}
         animate={{ y: 0 }}
-        transition={{ duration: 0.5 }}
+        transition={{ duration: 0.5, ease: "easeOut" }}
       >
         <div className="container mx-auto px-6 flex items-center justify-between">
 
           {/* 1. LOGOTIPO & BRANDING */}
-          <Link href="/" className="flex items-center gap-2 group relative z-50">
+          <Link href="/" className="flex items-center gap-2 group relative z-50" onClick={() => setIsMobileMenuOpen(false)}>
             {/* Logo Icon */}
-            <div className="relative w-10 h-10 overflow-hidden rounded-xl shadow-lg group-hover:scale-105 transition-transform">
-               {/* Usamos el AssetManifest para la fuente de la imagen */}
+            <div className="relative w-10 h-10 overflow-hidden rounded-xl shadow-lg group-hover:scale-105 transition-transform duration-300">
                <Image
                  src={AssetManifest.brand.logo}
-                 alt="Dázum Banhu Logo"
+                 alt={`${content.logoText} Logo`}
                  width={40}
                  height={40}
                  className="object-cover"
+                 priority
                />
             </div>
             {/* Texto Logo */}
-            <div className={cn("flex flex-col leading-none", isScrolled ? "text-zinc-900 dark:text-white" : "text-white")}>
-              <span className="font-heading font-bold text-lg tracking-tight">Dázum Banhu</span>
-              <span className="font-handwriting text-brand-primary text-sm font-bold -mt-1">Celulares</span>
+            <div className={cn("flex flex-col leading-none transition-colors", isScrolled ? "text-zinc-900 dark:text-white" : "text-white")}>
+              <span className="font-heading font-bold text-lg tracking-tight">
+                {content.logoText}
+              </span>
+              <span className="font-handwriting text-[#00C2CB] text-sm font-bold -mt-1">
+                {content.logoSubtext}
+              </span>
             </div>
           </Link>
 
           {/* 2. MENÚ DESKTOP (Cápsula Flotante) */}
-          <nav className="hidden md:flex items-center gap-1 bg-black/5 dark:bg-white/5 backdrop-blur-sm p-1.5 rounded-full border border-white/10">
-            {NAV_LINKS.map((link) => (
+          <nav className="hidden md:flex items-center gap-1 bg-black/5 dark:bg-white/5 backdrop-blur-sm p-1.5 rounded-full border border-white/10 shadow-sm">
+            {navLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
                 className={cn(
                   "px-4 py-2 rounded-full text-sm font-medium transition-all duration-200",
                   link.isHighlight
-                    ? "bg-brand-primary text-white shadow-lg shadow-brand-primary/20 hover:bg-brand-dark"
+                    ? "bg-[#00C2CB] text-white shadow-lg shadow-teal-500/20 hover:bg-[#008B92]"
                     : isScrolled
-                        ? "text-zinc-600 hover:text-brand-primary hover:bg-zinc-100 dark:text-zinc-300 dark:hover:bg-zinc-800"
+                        ? "text-zinc-600 hover:text-[#00C2CB] hover:bg-zinc-100 dark:text-zinc-300 dark:hover:bg-zinc-800"
                         : "text-white/90 hover:text-white hover:bg-white/10"
                 )}
               >
@@ -99,9 +115,11 @@ export function Navbar() {
             <button
               className={cn(
                 "hidden md:flex p-2.5 rounded-full transition-colors",
-                isScrolled ? "hover:bg-zinc-100 dark:hover:bg-zinc-800 text-zinc-700 dark:text-zinc-300" : "hover:bg-white/10 text-white"
+                isScrolled
+                  ? "hover:bg-zinc-100 dark:hover:bg-zinc-800 text-zinc-700 dark:text-zinc-300"
+                  : "hover:bg-white/10 text-white"
               )}
-              aria-label="Buscar"
+              aria-label={content.actions.search}
             >
               <Search size={20} />
             </button>
@@ -110,12 +128,14 @@ export function Navbar() {
             <button
               className={cn(
                 "relative p-2.5 rounded-full transition-colors group",
-                isScrolled ? "hover:bg-zinc-100 dark:hover:bg-zinc-800 text-zinc-700 dark:text-zinc-300" : "hover:bg-white/10 text-white"
+                isScrolled
+                  ? "hover:bg-zinc-100 dark:hover:bg-zinc-800 text-zinc-700 dark:text-zinc-300"
+                  : "hover:bg-white/10 text-white"
               )}
-              aria-label="Ver Carrinho"
+              aria-label={content.actions.cart}
             >
               <ShoppingBag size={20} />
-              <span className="absolute top-0 right-0 h-4 w-4 bg-brand-primary text-[10px] font-bold text-white flex items-center justify-center rounded-full ring-2 ring-white dark:ring-zinc-950 scale-0 group-hover:scale-100 transition-transform">
+              <span className="absolute top-0 right-0 h-4 w-4 bg-[#00C2CB] text-[10px] font-bold text-white flex items-center justify-center rounded-full ring-2 ring-white dark:ring-zinc-950 scale-0 group-hover:scale-100 transition-transform duration-200">
                 0
               </span>
             </button>
@@ -124,9 +144,10 @@ export function Navbar() {
             <button
               onClick={() => setIsMobileMenuOpen(true)}
               className={cn(
-                "md:hidden p-2 rounded-lg transition-colors",
+                "md:hidden p-2 rounded-lg transition-colors active:scale-95",
                 isScrolled ? "text-zinc-900 dark:text-white" : "text-white"
               )}
+              aria-label={content.actions.menu}
             >
               <Menu size={28} />
             </button>
@@ -138,13 +159,14 @@ export function Navbar() {
       <AnimatePresence>
         {isMobileMenuOpen && (
           <>
-            {/* Backdrop oscuro */}
+            {/* Backdrop oscuro con blur */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setIsMobileMenuOpen(false)}
               className="fixed inset-0 bg-black/60 z-[60] backdrop-blur-sm md:hidden"
+              aria-hidden="true"
             />
 
             {/* Sidebar Panel */}
@@ -157,10 +179,13 @@ export function Navbar() {
             >
               {/* Header del Menú */}
               <div className="flex items-center justify-between p-6 border-b border-zinc-100 dark:border-zinc-800">
-                <span className="font-heading font-bold text-xl text-zinc-900 dark:text-white">Menu</span>
+                <span className="font-heading font-bold text-xl text-zinc-900 dark:text-white">
+                  {content.mobile.menuTitle}
+                </span>
                 <button
                   onClick={() => setIsMobileMenuOpen(false)}
                   className="p-2 bg-zinc-100 dark:bg-zinc-800 rounded-full text-zinc-500 hover:text-red-500 transition-colors"
+                  aria-label="Cerrar menú"
                 >
                   <X size={20} />
                 </button>
@@ -168,7 +193,7 @@ export function Navbar() {
 
               {/* Lista de Links */}
               <div className="flex-1 overflow-y-auto py-6 px-4 flex flex-col gap-2">
-                {NAV_LINKS.map((link) => (
+                {navLinks.map((link) => (
                   <Link
                     key={link.href}
                     href={link.href}
@@ -176,12 +201,17 @@ export function Navbar() {
                     className={cn(
                       "flex items-center justify-between p-4 rounded-2xl text-lg font-medium transition-all active:scale-95",
                       link.isHighlight
-                        ? "bg-brand-primary/10 text-brand-primary"
+                        ? "bg-teal-50 dark:bg-teal-900/20 text-[#008B92] dark:text-[#00C2CB]"
                         : "text-zinc-600 dark:text-zinc-300 hover:bg-zinc-50 dark:hover:bg-zinc-800"
                     )}
                   >
-                    {link.label}
-                    {link.isHighlight ? <Wrench size={18} /> : <ChevronRight size={18} className="opacity-30" />}
+                    <span className="flex items-center gap-3">
+                      {link.label}
+                    </span>
+                    {link.isHighlight
+                      ? <Wrench size={18} className="text-[#00C2CB]" />
+                      : <ChevronRight size={18} className="opacity-30" />
+                    }
                   </Link>
                 ))}
               </div>
@@ -191,14 +221,14 @@ export function Navbar() {
                 <a
                   href="https://wa.me/5548984771608"
                   target="_blank"
-                  rel="noreferrer"
-                  className="flex items-center justify-center gap-3 w-full bg-[#25D366] text-white py-4 rounded-xl font-bold shadow-lg shadow-green-500/20 active:scale-95 transition-transform"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-center gap-3 w-full bg-[#22C55E] hover:bg-[#16A34A] text-white py-4 rounded-xl font-bold shadow-lg shadow-green-500/20 active:scale-95 transition-all"
                 >
                   <Phone size={20} />
-                  Falar no WhatsApp
+                  {content.mobile.emergencyCta}
                 </a>
-                <p className="text-center text-xs text-zinc-400 mt-4">
-                  Trindade, Florianópolis - SC
+                <p className="text-center text-xs text-zinc-400 mt-4 font-medium">
+                  {content.mobile.locationText}
                 </p>
               </div>
             </motion.aside>

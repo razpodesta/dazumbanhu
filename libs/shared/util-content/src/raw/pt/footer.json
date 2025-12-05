@@ -1,0 +1,48 @@
+{
+  "brandColumn": {
+    "description": "A assistência técnica #1 de Florianópolis. Especialistas apaixonados por tecnologia, entregando reparos em 15 minutos e acessórios premium.",
+    "address": "R. Lauro Linhares, 2123 - Trindade, Florianópolis - SC",
+    "workingHours": "Seg-Sex: 08:00 às 20:30 | Sáb: 09:00 às 17:00"
+  },
+  "navigationColumns": [
+    {
+      "title": "Serviços",
+      "links": [
+        { "label": "Troca de Tela", "href": "/servicos/tela" },
+        { "label": "Troca de Bateria", "href": "/servicos/bateria" },
+        { "label": "Banho Químico", "href": "/servicos/agua" },
+        { "label": "Face ID", "href": "/servicos/face-id" }
+      ]
+    },
+    {
+      "title": "Empresa",
+      "links": [
+        { "label": "Nossa História", "href": "/sobre" },
+        { "label": "Blog Tech", "href": "/blog" },
+        { "label": "Contato", "href": "/contato" },
+        { "label": "Carreiras", "href": "/vagas" }
+      ]
+    }
+  ],
+  "socialLinks": [
+    {
+      "platform": "instagram",
+      "href": "https://instagram.com/dazumbanhu",
+      "ariaLabel": "Siga a Dázum no Instagram"
+    },
+    {
+      "platform": "whatsapp",
+      "href": "https://wa.me/5548984771608",
+      "ariaLabel": "Fale com nosso time no WhatsApp"
+    }
+  ],
+  "legal": {
+    "copyrightText": "© 2025 Raz Podestá - MetaShark Tech. Todos os direitos reservados.",
+    "developerCredit": "Engenharia por MetaShark Tech",
+    "developerUrl": "https://metashark.tech",
+    "policies": [
+      { "label": "Política de Privacidade", "href": "/legal/privacidade" },
+      { "label": "Termos de Uso", "href": "/legal/termos" }
+    ]
+  }
+}

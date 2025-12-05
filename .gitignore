@@ -1,48 +1,71 @@
-# See https://docs.github.com/en/get-started/getting-started-with-git/ignoring-files for more about ignoring files.
+# --------------------------------------------------------------------
+# 🛑 DEPENDENCIAS & LOGS
+# --------------------------------------------------------------------
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+error.log
 
-# compiled output
-dist
-tmp
-out-tsc
+# --------------------------------------------------------------------
+# 🏗️ NX & MONOREPO BUILD ARTIFACTS
+# --------------------------------------------------------------------
+# Carpetas de distribución generadas por Nx
+dist/
+tmp/
+out-tsc/
 
-# dependencies
-node_modules
+# Cache local de Nx (No subir a git, usar Nx Cloud)
+.nx/
 
-# IDEs and editors
-/.idea
-.project
-.classpath
-.c9/
-*.launch
-.settings/
-*.sublime-workspace
+# Reportes generados por tu script de snapshot
+snapshot-reports/
 
-# IDE - VSCode
-.vscode/*
-!.vscode/settings.json
-!.vscode/tasks.json
-!.vscode/launch.json
-!.vscode/extensions.json
+# --------------------------------------------------------------------
+# ⚡ NEXT.JS (STORE-FRONTEND)
+# --------------------------------------------------------------------
+.next/
+out/
+build/
 
-# misc
-/.sass-cache
-/connect.lock
-/coverage
-/libpeerconnection.log
-npm-debug.log
-yarn-error.log
-testem.log
-/typings
+# --------------------------------------------------------------------
+# 🔒 SEGURIDAD & ENTORNO (CRÍTICO)
+# --------------------------------------------------------------------
+# Nunca subir claves API reales
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+.env*.local
 
-# System Files
+# Excepción: Mantener ejemplos para el equipo
+!.env.example
+!.env.template
+
+# --------------------------------------------------------------------
+# ☁️ VERCEL & CLOUD
+# --------------------------------------------------------------------
+.vercel/
+
+# --------------------------------------------------------------------
+# 🛠️ IDE & OS JUNK
+# --------------------------------------------------------------------
 .DS_Store
 Thumbs.db
+.idea/
+.vscode/
+*.swp
+*.swo
 
-.nx/cache
-.nx/workspace-data
-.cursor/rules/nx-rules.mdc
-.github/instructions/nx.instructions.md
-
-# Next.js
-.next
-out
+# --------------------------------------------------------------------
+# 🧪 TESTING & COVERAGE
+# --------------------------------------------------------------------
+coverage/
+cypress/videos/
+cypress/screenshots/
+test-results/
+playwright-report/
+blob-report/

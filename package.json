@@ -6,24 +6,31 @@
   "creation-date": "2025-12-04",
   "private": true,
   "scripts": {
-    "//--- COMANDOS CRÍTICOS VERCEL (PROD) ---//": "",
-    "vercel-build": "pnpm run build:web",
-    "build:web": "npx nx build store-frontend --prod",
-    "//--- DESPLIEGUE ---//": "",
-    "deploy:prod": "git add . && git commit -m \"chore(release): Deploy production build\" && git push origin main",
-    "//--- SIMULACIÓN DE PRODUCCIÓN LOCAL ---//": "",
-    "build:all": "nx run-many --target=build --all --configuration=production",
-    "serve:web": "nx start store-frontend",
-    "prod:sim": "pnpm run build:web && pnpm run serve:web",
-    "//--- DESARROLLO ---//": "",
-    "dev": "nx serve store-frontend",
+    "//--- 1. CORE & CONTENT ENGINE (FOUNDATION) ---//": "",
+    "generate:content": "node libs/shared/util-content/scripts/generate-dictionary.js",
+
+    "//--- 2. DESARROLLO (DAILY WORKFLOW) ---//": "",
+    "dev": "pnpm run generate:content && nx serve store-frontend",
     "dev:web": "nx serve store-frontend --with-deps",
     "dev:all": "nx run-many --target=serve --all --parallel=3",
-    "//--- MANTENIMIENTO & CALIDAD ---//": "",
+
+    "//--- 3. PRODUCCIÓN & DEPLOYMENT (VERCEL CI/CD) ---//": "",
+    "vercel-build": "pnpm run build:web",
+    "build:web": "pnpm run generate:content && npx nx build store-frontend --prod",
+    "deploy:prod": "git add . && git commit -m \"chore(release): Deploy production build\" && git push origin main",
+
+    "//--- 4. SIMULACIÓN LOCAL (PRE-PROD) ---//": "",
+    "prod:sim": "pnpm run build:web && pnpm run serve:web",
+    "serve:web": "nx start store-frontend",
+    "build:all": "nx run-many --target=build --all --configuration=production",
+
+    "//--- 5. MANTENIMIENTO & CALIDAD (QA) ---//": "",
+    "typecheck": "tsc -b",
     "lint": "nx run-many --target=lint",
     "test": "nx run-many --target=test",
     "test:all": "nx run-many --target=test --parallel=false --skip-nx-cache",
-    "typecheck": "tsc -b",
+
+    "//--- 6. NX UTILITIES ---//": "",
     "graph": "nx graph",
     "clean": "nx reset"
   },
@@ -78,7 +85,6 @@
     "typescript": "~5.9.2",
     "typescript-eslint": "^8.40.0"
   },
-  "packageManager": "pnpm@10.20.0+sha512.cf9998222162dd85864d0a8102e7892e7ba4ceadebbf5a31f9c2fce48dfce317a9c53b9f6464d1ef9042cba2e02ae02a9f7c143a2b438cd93c91840f0192b9dd",
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
     "@radix-ui/react-avatar": "^1.1.11",
@@ -106,5 +112,6 @@
     "uuid": "^13.0.0",
     "zod": "^4.1.13",
     "zustand": "^5.0.9"
-  }
+  },
+  "packageManager": "pnpm@10.20.0+sha512.cf9998222162dd85864d0a8102e7892e7ba4ceadebbf5a31f9c2fce48dfce317a9c53b9f6464d1ef9042cba2e02ae02a9f7c143a2b438cd93c91840f0192b9dd"
 }
