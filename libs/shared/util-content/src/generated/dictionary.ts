@@ -1,7 +1,12 @@
 
 /**
- * ⚠️ ARCHIVO GENERADO AUTOMÁTICAMENTE - NO EDITAR
- * Generado el: 2025-12-05T16:37:33.290Z
+ * ------------------------------------------------------------------
+ * ⚠️ ARCHIVO GENERADO AUTOMÁTICAMENTE - NO EDITAR MANUALMENTE
+ * ------------------------------------------------------------------
+ * Origen de datos: libs/shared/util-content/src/raw
+ * Generado en:     libs/shared/util-content/src/generated/dictionary.ts
+ * Fecha:           2025-12-05T17:26:29.638Z
+ * ------------------------------------------------------------------
  */
 
 export const i18nDictionary = {
@@ -206,7 +211,10 @@ export const i18nDictionary = {
   }
 } as const;
 
-// Exportación directa del idioma default para uso rápido
+/**
+ * Exportación directa del idioma por defecto ('pt')
+ */
 export const ContentDictionary = i18nDictionary['pt'];
 
 export type DictionaryType = typeof ContentDictionary;
+export type I18nDictionaryType = typeof i18nDictionary;
