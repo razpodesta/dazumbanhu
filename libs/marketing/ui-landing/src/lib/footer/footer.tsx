@@ -7,11 +7,11 @@ import { Instagram, MessageCircle, Facebook, MapPin, Clock, ArrowUpRight, Shield
 import { ContentDictionary } from '@mobile-store/shared-util-content';
 import { AssetManifest } from '@mobile-store/shared-util-assets';
 
-// Tipo auxiliar para links con propiedades opcionales
+// Tipado seguro para arrays de solo lectura (Content Engine)
 type FooterLinkType = {
-  label: string;
-  href: string;
-  isExternal?: boolean;
+  readonly label: string;
+  readonly href: string;
+  readonly isExternal?: boolean;
 };
 
 export function Footer() {
@@ -82,8 +82,9 @@ export function Footer() {
                 </h3>
                 <nav>
                   <ul className="flex flex-col gap-3">
-                    {/* Casting seguro aquí */}
-                    {(col.links as FooterLinkType[]).map((link, linkIdx) => (
+                    {/* Casting seguro usando 'unknown' como puente si TS se pone difícil, o readonly directo */}
+                    {/* Al definir FooterLinkType como readonly, el cast directo funciona */}
+                    {(col.links as unknown as readonly FooterLinkType[]).map((link, linkIdx) => (
                       <li key={linkIdx}>
                         <Link
                           href={link.href}
