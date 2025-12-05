@@ -7,14 +7,7 @@ import { motion, AnimatePresence, useScroll, useMotionValueEvent } from 'framer-
 import { Menu, X, ShoppingBag, Search, Wrench, ChevronRight, Phone } from 'lucide-react';
 import { cn } from '@mobile-store/shared-ui-kit';
 import { AssetManifest } from '@mobile-store/shared-util-assets';
-import { ContentDictionary } from '@mobile-store/shared-util-content';
-
-// Tipo auxiliar para manejar propiedades opcionales del diccionario generado
-type NavLinkType = {
-  label: string;
-  href: string;
-  isHighlight?: boolean;
-};
+import { ContentDictionary, type NavbarContent } from '@mobile-store/shared-util-content';
 
 export function Navbar() {
   const { scrollY } = useScroll();
@@ -23,8 +16,8 @@ export function Navbar() {
 
   const content = ContentDictionary.navbar;
 
-  // Casting seguro para iteración
-  const navLinks = Object.values(content.links) as NavLinkType[];
+  // Type-Safe Iteration: Convertimos el objeto de links en array preservando tipos
+  const navLinks = Object.values(content.links);
 
   useMotionValueEvent(scrollY, "change", (latest) => {
     const shouldBeScrolled = latest > 50;
@@ -33,6 +26,7 @@ export function Navbar() {
     }
   });
 
+  // Bloqueo de scroll cuando el menú móvil está abierto
   useEffect(() => {
     if (isMobileMenuOpen) {
       document.body.style.overflow = 'hidden';

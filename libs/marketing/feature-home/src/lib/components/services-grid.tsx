@@ -3,14 +3,7 @@
 import { Wrench, Truck, ShieldCheck, Timer, LucideIcon } from 'lucide-react';
 import { ContentDictionary } from '@mobile-store/shared-util-content';
 
-// 1. Tipado estricto para los items del grid (Elite Type Safety)
-type ServiceItem = {
-  readonly iconKey: string; // Clave para mapear el icono
-  readonly title: string;
-  readonly description: string;
-};
-
-// 2. Mapa de Iconos (Visual Mapping)
+// 1. Mapa de Iconos (Visual Mapping)
 const ICON_MAP: Record<string, LucideIcon> = {
   timer: Timer,
   truck: Truck,
@@ -36,8 +29,9 @@ export function ServicesGrid() {
 
         {/* Grid Bento Box */}
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {/* Casting seguro: Convertimos el readonly array del diccionario a nuestro tipo local */}
-          {(items as unknown as readonly ServiceItem[]).map((feature, index) => {
+          {items.map((feature, index) => {
+            // TypeScript ahora infiere correctamente que feature.iconKey es una de las claves válidas
+            // gracias al Schema Zod y al "as const" del diccionario.
             const IconComponent = ICON_MAP[feature.iconKey];
 
             return (

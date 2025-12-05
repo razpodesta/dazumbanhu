@@ -7,13 +7,6 @@ import { Instagram, MessageCircle, Facebook, MapPin, Clock, ArrowUpRight, Shield
 import { ContentDictionary } from '@mobile-store/shared-util-content';
 import { AssetManifest } from '@mobile-store/shared-util-assets';
 
-// Tipado seguro para arrays de solo lectura (Content Engine)
-type FooterLinkType = {
-  readonly label: string;
-  readonly href: string;
-  readonly isExternal?: boolean;
-};
-
 export function Footer() {
   const content = ContentDictionary.footer;
   const brandData = ContentDictionary.navbar;
@@ -82,9 +75,7 @@ export function Footer() {
                 </h3>
                 <nav>
                   <ul className="flex flex-col gap-3">
-                    {/* Casting seguro usando 'unknown' como puente si TS se pone difícil, o readonly directo */}
-                    {/* Al definir FooterLinkType como readonly, el cast directo funciona */}
-                    {(col.links as unknown as readonly FooterLinkType[]).map((link, linkIdx) => (
+                    {col.links.map((link, linkIdx) => (
                       <li key={linkIdx}>
                         <Link
                           href={link.href}
