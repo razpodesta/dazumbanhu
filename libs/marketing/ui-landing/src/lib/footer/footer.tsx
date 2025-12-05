@@ -7,11 +7,13 @@ import { Instagram, MessageCircle, Facebook, MapPin, Clock, ArrowUpRight, Shield
 import { ContentDictionary } from '@mobile-store/shared-util-content';
 import { AssetManifest } from '@mobile-store/shared-util-assets';
 
-/**
- * @component Footer
- * @description Aparato de navegación final.
- * Integra branding, navegación semántica y validación social.
- */
+// Tipo auxiliar para links con propiedades opcionales
+type FooterLinkType = {
+  label: string;
+  href: string;
+  isExternal?: boolean;
+};
+
 export function Footer() {
   const content = ContentDictionary.footer;
   const brandData = ContentDictionary.navbar;
@@ -34,7 +36,7 @@ export function Footer() {
         {/* GRID PRINCIPAL */}
         <div className="grid gap-12 lg:grid-cols-12 lg:gap-8">
 
-          {/* IDENTIDAD DE MARCA (4 Columnas) */}
+          {/* IDENTIDAD DE MARCA */}
           <div className="flex flex-col gap-6 lg:col-span-4">
             <Link href="/" className="inline-flex items-center gap-2 transition-opacity hover:opacity-80">
               <div className="relative h-12 w-12 overflow-hidden rounded-xl shadow-sm">
@@ -71,7 +73,7 @@ export function Footer() {
             </div>
           </div>
 
-          {/* NAVEGACIÓN DINÁMICA (8 Columnas) */}
+          {/* NAVEGACIÓN DINÁMICA */}
           <div className="grid grid-cols-2 gap-8 lg:col-span-8 lg:grid-cols-4 lg:pl-12">
             {content.navigationColumns.map((col, idx) => (
               <div key={idx} className="flex flex-col gap-4">
@@ -80,7 +82,8 @@ export function Footer() {
                 </h3>
                 <nav>
                   <ul className="flex flex-col gap-3">
-                    {col.links.map((link, linkIdx) => (
+                    {/* Casting seguro aquí */}
+                    {(col.links as FooterLinkType[]).map((link, linkIdx) => (
                       <li key={linkIdx}>
                         <Link
                           href={link.href}
@@ -97,7 +100,7 @@ export function Footer() {
               </div>
             ))}
 
-            {/* COLUMNA SOCIAL / CERTIFICACIÓN */}
+            {/* COLUMNA SOCIAL */}
             <div className="col-span-2 flex flex-col gap-6 lg:col-span-2">
               <div>
                 <h3 className="mb-4 font-heading text-xs font-bold uppercase tracking-wider text-zinc-900 dark:text-white">
@@ -134,7 +137,7 @@ export function Footer() {
           </div>
         </div>
 
-        {/* BARRA INFERIOR (LEGAL) */}
+        {/* LEGAL */}
         <div className="mt-16 flex flex-col items-center justify-between gap-6 border-t border-zinc-100 pt-8 text-xs text-zinc-500 dark:border-zinc-800 dark:text-zinc-500 md:flex-row">
           <p>{content.legal.copyrightText.replace('2025', String(currentYear))}</p>
 

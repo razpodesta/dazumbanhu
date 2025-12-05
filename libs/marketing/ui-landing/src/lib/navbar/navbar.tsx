@@ -9,26 +9,23 @@ import { cn } from '@mobile-store/shared-ui-kit';
 import { AssetManifest } from '@mobile-store/shared-util-assets';
 import { ContentDictionary } from '@mobile-store/shared-util-content';
 
-/**
- * Navbar Component
- *
- * Barra de navegación principal del sitio.
- * - Reactiva al scroll (Glassmorphism).
- * - Totalmente data-driven (contenido desde ContentDictionary).
- * - Mobile First con menú lateral animado.
- */
+// Tipo auxiliar para manejar propiedades opcionales del diccionario generado
+type NavLinkType = {
+  label: string;
+  href: string;
+  isHighlight?: boolean;
+};
+
 export function Navbar() {
   const { scrollY } = useScroll();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  // Acceso seguro al contenido tipado (generado por el Content Engine)
   const content = ContentDictionary.navbar;
 
-  // Transformamos el objeto de links en un array para iterar
-  const navLinks = Object.values(content.links);
+  // Casting seguro para iteración
+  const navLinks = Object.values(content.links) as NavLinkType[];
 
-  // Detectar scroll para cambiar el estilo visual
   useMotionValueEvent(scrollY, "change", (latest) => {
     const shouldBeScrolled = latest > 50;
     if (isScrolled !== shouldBeScrolled) {
@@ -36,15 +33,12 @@ export function Navbar() {
     }
   });
 
-  // Bloquear el scroll del body cuando el menú móvil está abierto
   useEffect(() => {
     if (isMobileMenuOpen) {
       document.body.style.overflow = 'hidden';
     } else {
       document.body.style.overflow = 'unset';
     }
-
-    // Cleanup al desmontar
     return () => {
       document.body.style.overflow = 'unset';
     };
@@ -65,9 +59,8 @@ export function Navbar() {
       >
         <div className="container mx-auto px-6 flex items-center justify-between">
 
-          {/* 1. LOGOTIPO & BRANDING */}
+          {/* 1. LOGOTIPO */}
           <Link href="/" className="flex items-center gap-2 group relative z-50" onClick={() => setIsMobileMenuOpen(false)}>
-            {/* Logo Icon */}
             <div className="relative w-10 h-10 overflow-hidden rounded-xl shadow-lg group-hover:scale-105 transition-transform duration-300">
                <Image
                  src={AssetManifest.brand.logo}
@@ -78,7 +71,6 @@ export function Navbar() {
                  priority
                />
             </div>
-            {/* Texto Logo */}
             <div className={cn("flex flex-col leading-none transition-colors", isScrolled ? "text-zinc-900 dark:text-white" : "text-white")}>
               <span className="font-heading font-bold text-lg tracking-tight">
                 {content.logoText}
@@ -89,7 +81,7 @@ export function Navbar() {
             </div>
           </Link>
 
-          {/* 2. MENÚ DESKTOP (Cápsula Flotante) */}
+          {/* 2. MENÚ DESKTOP */}
           <nav className="hidden md:flex items-center gap-1 bg-black/5 dark:bg-white/5 backdrop-blur-sm p-1.5 rounded-full border border-white/10 shadow-sm">
             {navLinks.map((link) => (
               <Link
@@ -109,9 +101,8 @@ export function Navbar() {
             ))}
           </nav>
 
-          {/* 3. ACCIONES (Carrito / Search / Menu) */}
+          {/* 3. ACCIONES */}
           <div className="flex items-center gap-3">
-            {/* Search (Desktop) */}
             <button
               className={cn(
                 "hidden md:flex p-2.5 rounded-full transition-colors",
@@ -124,7 +115,6 @@ export function Navbar() {
               <Search size={20} />
             </button>
 
-            {/* Cart (Desktop & Mobile) */}
             <button
               className={cn(
                 "relative p-2.5 rounded-full transition-colors group",
@@ -140,7 +130,6 @@ export function Navbar() {
               </span>
             </button>
 
-            {/* Hamburger (Mobile Only) */}
             <button
               onClick={() => setIsMobileMenuOpen(true)}
               className={cn(
@@ -155,11 +144,10 @@ export function Navbar() {
         </div>
       </motion.header>
 
-      {/* 4. MOBILE MENU OVERLAY */}
+      {/* 4. MOBILE MENU */}
       <AnimatePresence>
         {isMobileMenuOpen && (
           <>
-            {/* Backdrop oscuro con blur */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -169,7 +157,6 @@ export function Navbar() {
               aria-hidden="true"
             />
 
-            {/* Sidebar Panel */}
             <motion.aside
               initial={{ x: '100%' }}
               animate={{ x: 0 }}
@@ -177,7 +164,6 @@ export function Navbar() {
               transition={{ type: "spring", damping: 25, stiffness: 200 }}
               className="fixed top-0 right-0 bottom-0 w-[85vw] max-w-sm bg-white dark:bg-zinc-900 z-[70] shadow-2xl flex flex-col md:hidden"
             >
-              {/* Header del Menú */}
               <div className="flex items-center justify-between p-6 border-b border-zinc-100 dark:border-zinc-800">
                 <span className="font-heading font-bold text-xl text-zinc-900 dark:text-white">
                   {content.mobile.menuTitle}
@@ -191,7 +177,6 @@ export function Navbar() {
                 </button>
               </div>
 
-              {/* Lista de Links */}
               <div className="flex-1 overflow-y-auto py-6 px-4 flex flex-col gap-2">
                 {navLinks.map((link) => (
                   <Link
@@ -216,7 +201,6 @@ export function Navbar() {
                 ))}
               </div>
 
-              {/* Footer del Menú (CTA Emergencia) */}
               <div className="p-6 border-t border-zinc-100 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-950/50">
                 <a
                   href="https://wa.me/5548984771608"
