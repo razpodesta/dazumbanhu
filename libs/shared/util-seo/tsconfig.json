@@ -3,18 +3,13 @@
   "compilerOptions": {
     "module": "esnext",
     "moduleResolution": "bundler",
-    "strict": true,
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true
+    "strict": true
   },
   "files": [],
   "include": [],
   "references": [
     {
       "path": "./tsconfig.lib.json"
-    },
-    {
-      "path": "./tsconfig.spec.json"
     }
   ]
 }

@@ -1,47 +1,26 @@
-import './global.css';
-import { Inter, Outfit, Caveat } from 'next/font/google';
-import { ThemeProvider } from 'next-themes'; // Necesitarás instalarlo si no está
-import { cn } from '@mobile-store/shared-ui-kit';
+// ... imports anteriores
+import { constructMetadata, getLocalBusinessSchema } from '@mobile-store/shared-util-seo';
 
-// 1. Configuración de Fuentes Optimizadas
-const inter = Inter({
-  subsets: ['latin'],
-  variable: '--font-inter',
-  display: 'swap'
+// 1. Metadata Global (Se hereda en todas las páginas)
+export const metadata = constructMetadata({
+  title: 'Home', // Se convertirá en "Home | Dázum Banhu"
+  description: 'A assistência técnica #1 de Florianópolis. Conserto rápido e acessórios premium.',
 });
 
-const outfit = Outfit({
-  subsets: ['latin'],
-  variable: '--font-outfit',
-  display: 'swap'
-});
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  // 2. Generar Schema JSON-LD
+  const jsonLd = getLocalBusinessSchema();
 
-const caveat = Caveat({
-  subsets: ['latin'],
-  variable: '--font-caveat',
-  display: 'swap'
-});
-
-export const metadata = {
-  title: 'Dázum Banhu | Assistência Técnica Premium',
-  description: 'Você merece o melhor da tecnologia.',
-};
-
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
   return (
-    // Inyectamos las variables CSS de las fuentes en el HTML
-    <html lang="pt-BR" suppressHydrationWarning className={cn(
-      inter.variable,
-      outfit.variable,
-      caveat.variable
-    )}>
+    <html lang="pt-BR" suppressHydrationWarning className="...">
       <body>
-        {/* Provider para Dark Mode (System preference default) */}
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+        {/* 3. Inyección de Schema.org para Google Local SEO */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+
+        <ThemeProvider ...>
           {children}
         </ThemeProvider>
       </body>

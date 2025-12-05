@@ -1,10 +1,12 @@
 {
   "extends": "../../../tsconfig.base.json",
   "compilerOptions": {
-    "module": "nodenext",
-    "moduleResolution": "nodenext",
+    "module": "esnext",       // ANTES: nodenext
+    "moduleResolution": "bundler", // ANTES: nodenext
     "strict": true,
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true
   },
   "files": [],
   "include": [],

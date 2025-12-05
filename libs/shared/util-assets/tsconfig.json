@@ -1,9 +1,11 @@
 {
   "extends": "../../../tsconfig.base.json",
   "compilerOptions": {
-    "module": "nodenext",
-    "moduleResolution": "nodenext",
-    "strict": true
+    "module": "esnext",       // ANTES: nodenext
+    "moduleResolution": "bundler", // ANTES: nodenext
+    "strict": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true
   },
   "files": [],
   "include": [],
@@ -12,7 +14,7 @@
       "path": "./tsconfig.lib.json"
     },
     {
-      "path": "./tsconfig.spec.json" // Lo crearemos abajo
+      "path": "./tsconfig.spec.json"
     }
   ]
 }
